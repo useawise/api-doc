@@ -1,6 +1,6 @@
 #!/bin/bash
 
-jq \
+jq -c \
 "delpaths([ \
     (.paths | keys | .[] | select(test(\"relationships\")) | [\"paths\",.]) \
 ]) | \
