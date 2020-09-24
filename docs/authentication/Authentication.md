@@ -7,24 +7,28 @@ tags: [authentication]
 Each authenticated request requires the `Authorization` header to be set with the string `SessionId <id>` where `<id>` must be replaced with the Session Id obtained as described next. In order to obtain a Session Id, make a POST to `/sessions` with the body:
 ```
 {
-  data: {
-    type: 'session-request',
-    attributes: {
-      login: 'user@email.com',
-      password: 'userPassword',
-      userAgent: 'myApp'
+  "data": {
+    "type": "session-request",
+    "attributes": {
+      "login": "user@email.com",
+      "password": "userPassword",
+      "userAgent": "myApp"
     }
   }
 }
 ```
 
+```
+curl -H "Content-Type: application/json" -XPOST --data '{ "data": { "type": "session-request", "attributes": { "login": "user@email.com", "password": "userPassword", "userAgent": "curl" } } }' https://api.convess.com/sessions
+```
+
 If the request is successful (HTTP 200 Code), it will return a JSON with the following structure:
 ```
 {
-  data: {
-    id: '<sessionId>',
-    secret: '<sessionSecretForHmacSigning>'
-    expirationDateTime: '<dateTime>'
+  "data": {
+    "id: "<sessionId>",
+    "secret": "<sessionSecretForHmacSigning>"
+    "expirationDateTime": "<dateTime>"
   }
 }
 ```
