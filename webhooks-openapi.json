@@ -1,5 +1,18 @@
 {
     "openapi": "3.0.0",
+    "info": {
+      "title": "AWISE Webhooks API ",
+      "version": "1.0.0",
+      "description": "AWISE Webhooks API",
+      "termsOfService": "https://www.quantosobra.com.br/termos-de-uso/",
+      "contact": {
+        "name": "Desenvolvimento QuantoSobra",
+        "email": "devs@quantosobra.com.br"
+      },
+      "license": {
+        "name": ""
+      }
+    },
     "paths": {
         "/webhooks": {
             "get": {
