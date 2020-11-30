@@ -1,0 +1,157 @@
+openapi: 3.0.0
+paths:
+  /webhooks:
+    get:
+      operationId: ListWebhooks
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/WebhookConfig' } }
+                type: object
+    post:
+      operationId: CreateWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookCommand'
+      responses:
+        '201':
+          description: Success
+        '400':
+          description: 'Validation error'
+      callbacks:
+        webhook:
+          '{$request.body#/url}':
+            post:
+              requestBody:
+                content:
+                  application/json: { schema: { $ref: '#/components/schemas/WebhookPayload' } }
+              responses:
+                2XX:
+                  description: 'Webhook was processed successfully'
+                default:
+                  description: 'Webhook will be scheduled to be sent again after 3 hours'
+  '/webhooks/{id}':
+    get:
+      operationId: FindWebhook
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { $ref: '#/components/schemas/WebhookConfig' }
+                type: object
+        '404':
+          description: 'Not found'
+    delete:
+      operationId: DeleteWebhook
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Success
+    patch:
+      operationId: UpdateWebhook
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookCommand'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Validation error'
+components:
+  schemas:
+    CreateWebhookCommand:
+      required:
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          format: uri
+          maxLength: 500
+          nullable: true
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+      type: object
+    UpdateWebhookCommand:
+      properties:
+        url:
+          type: string
+          format: uri
+          maxLength: 500
+          nullable: true
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+      type: object
+    WebhookData_ProductStockChanged:
+      properties:
+        product:
+          type: string
+        stockLocation:
+          type: string
+        availableStock:
+          type: string
+      type: object
+    WebhookEvent:
+      type: string
+      enum:
+        - PRODUCT_STOCK_CHANGED
+    WebhookConfig:
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEvent'
+      type: object
+    WebhookPayload:
+      properties:
+        event:
+          $ref: '#/components/schemas/WebhookEvent'
+        data:
+          oneOf:
+            -
+              $ref: '#/components/schemas/WebhookData_ProductStockChanged'
+        timestamp:
+          type: string
+          format: date-time
+      type: object
+
