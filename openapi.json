@@ -59889,7 +59889,7 @@
             },
             "storeCreditInterestsPercent": {
               "type": "number",
-              "description": "Percent of interests in store credit"
+              "description": "Interests percent rate when paying with store credits"
             },
             "flatRatePercent": {
               "type": "number",
