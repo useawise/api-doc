@@ -59856,52 +59856,68 @@
               "type": "string"
             },
             "creditCardFlag": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of credit card flag (e. g. Mastercard, Visa)"
             },
             "interestsFineGracePeriod": {
-              "type": "number"
+              "type": "number",
+              "description": "Time (in days) of grace period"
             },
             "interestsType": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of interest that can be applied on fine. Valid values are's' (simple) or 'c' (compound)"
             },
             "periodInterestsType": {
-              "type": "string"
+              "type": "string",
+              "description": "Period to apply the fine to the payment. Valid values are 'd' (day), 'm' (month) and 'a' (year)"
             },
             "overdueInterestsPercent": {
-              "type": "number"
+              "type": "number",
+              "description": "Percent of interests to be applied in payment after overdue"
             },
             "fineType": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of fine to apply in payment. Valid values are 'v' (value) or 'p' (percent)"
             },
             "overdueFinePercent": {
-              "type": "number"
+              "type": "number",
+              "description": "Percent of fine to be applied in payment "
             },
             "overdueFineValue": {
-              "type": "number"
+              "type": "number",
+              "description": "Value of fine to be applied in payment"
             },
             "storeCreditInterestsPercent": {
-              "type": "number"
+              "type": "number",
+              "description": "Percent of interests in store credit"
             },
             "flatRatePercent": {
-              "type": "number"
+              "type": "number",
+              "description": "Percent of flat in payment"
             },
             "feeValue": {
-              "type": "number"
+              "type": "number",
+              "description": "Value of fee in payment"
             },
             "billingDays": {
-              "type": "number"
+              "type": "number",
+              "description": "Number of days to compensate payment"
             },
             "paymentCondition": {
-              "type": "string"
+              "type": "string",
+              "description": "Payment condition. Valid values are 'or' on order) and 'in' (installments)"
             },
             "createdDateTime": {
-              "type": "string"
+              "type": "string",
+              "description": "Timestamp of register created"
             },
             "changedDateTime": {
-              "type": "string"
+              "type": "string",
+              "description": "Timestamp of register last update"
             },
             "removedDateTime": {
-              "type": "string"
+              "type": "string",
+              "description": "Timestamp of register removed"
             }
           }
         },
@@ -59927,10 +59943,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -59941,7 +59953,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -59964,10 +59980,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -59978,7 +59990,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60001,10 +60017,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60015,7 +60027,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60038,10 +60054,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60052,7 +60064,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60075,10 +60091,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60089,7 +60101,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60112,10 +60128,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60126,7 +60138,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60149,10 +60165,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60163,7 +60175,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             },
@@ -60188,10 +60204,6 @@
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": [
-                      "type",
-                      "id"
-                    ],
                     "properties": {
                       "type": {
                         "type": "string"
@@ -60202,7 +60214,11 @@
                       "meta": {
                         "type": "object"
                       }
-                    }
+                    },
+                    "required": [
+                      "type",
+                      "id"
+                    ]
                   }
                 }
               }
@@ -60226,10 +60242,6 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "type",
-                    "id"
-                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -60240,7 +60252,11 @@
                     "meta": {
                       "type": "object"
                     }
-                  }
+                  },
+                  "required": [
+                    "type",
+                    "id"
+                  ]
                 }
               }
             }
