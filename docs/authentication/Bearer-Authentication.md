@@ -1,8 +1,8 @@
-# Bearer-Authentication
+---
+tags: [authentication,bearer]
+---
 
----
-tags: [authentication]
----
+# Bearer-Authentication
 
 Each authenticated request requires the `Authorization` header to be set with the string `Bearer <token>` where `<token>` must be replaced with the User Token obtained following the link [https://app.convess.com/a/-/-/profile/edit](https://app.convess.com/a/-/-/profile/edit).
 
