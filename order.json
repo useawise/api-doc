@@ -1,435 +1,443 @@
 {
-    "openapi": "3.0.0",
-    "paths": {
-        "/orders": {
-            "post": {
-                "operationId": "createOrder",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateOrderCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
+  "openapi": "3.0.0",
+  "paths": {
+    "/orders": {
+      "post": {
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderCommand"
+              }
             }
+          }
         },
-        "/orders/{id}/bill": {
-            "post": {
-                "operationId": "confirmBilling",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ConfirmBillingCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/{id}": {
-            "get": {
-                "operationId": "FindOrder",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
                     },
-                    "404": {
-                        "description": "Not found"
+                    "success": {
+                      "type": "boolean"
                     }
+                  },
+                  "type": "object"
                 }
+              }
             }
-        }
+          }
+        },
+        "summary": "New Order"
+      }
     },
-    "components": {
-        "schemas": {
-            "ConfirmBillingCommand": {
-                "properties": {
-                    "cashRegisterId": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ApplicationBilling": {
-                "properties": {
-                    "usedCreditValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ApplicationBillingPayment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "ApplicationBillingInstallment": {
-                "properties": {
-                    "value": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ApplicationBillingPayment": {
-                "properties": {
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ApplicationBillingInstallment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrderCommand": {
-                "properties": {
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ApplicationOrderItem"
-                        }
-                    },
-                    "shipmentCosts": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "insuranceValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "discountValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/ApplicationBilling"
-                    },
-                    "status": {
-                        "type": "string",
-                        "format": "string",
-                        "nullable": true
-                    },
-                    "cashRegisterId": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ApplicationOrderItem": {
-                "properties": {
-                    "productId": {
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "deliveryStatus": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unitPrice": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBilling": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingPayment"
-                        }
-                    },
-                    "usedCreditAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBillingInstallment": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "amount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBillingPayment": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string"
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingInstallment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrder": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "branch": {
-                        "type": "string"
-                    },
-                    "company": {
-                        "type": "string"
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelOrderItem"
-                        }
-                    },
-                    "total": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/ReadModelBilling"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrderBilling": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingPayment"
-                        }
-                    },
-                    "usedCreditAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrderItem": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "product": {
-                        "$ref": "#/components/schemas/ReadModelProductReference"
-                    },
-                    "quantity": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "unitPrice": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "totalAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "deliveryStatus": {
-                        "type": "string"
-                    },
-                    "observation": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelProductReference": {
-                "properties": {
-                    "productId": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "code": {
-                        "type": "string"
-                    },
-                    "barcode": {
-                        "type": "string"
-                    },
-                    "unit": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+    "/orders/{id}/bill": {
+      "post": {
+        "operationId": "confirmBilling",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
-        }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBillingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Confirm billing",
+        "description": "If the order was created with billing status \"pending\", then this endpoint will make the billing and create all the financial records for the order."
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "operationId": "FindOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get order"
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "ConfirmBillingCommand": {
+        "properties": {
+          "cashRegisterId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApplicationBilling": {
+        "properties": {
+          "usedCreditValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationBillingPayment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "ApplicationBillingInstallment": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ApplicationBillingPayment": {
+        "properties": {
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationBillingInstallment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrderCommand": {
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "salespersonId": {
+            "type": "string"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationOrderItem"
+            }
+          },
+          "shipmentCosts": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "insuranceValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "billing": {
+            "$ref": "#/components/schemas/ApplicationBilling"
+          },
+          "status": {
+            "type": "string",
+            "format": "string",
+            "nullable": true
+          },
+          "cashRegisterId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApplicationOrderItem": {
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "deliveryStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitPrice": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBilling": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingPayment"
+            }
+          },
+          "usedCreditAmount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBillingInstallment": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBillingPayment": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string"
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingInstallment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrder": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "salespersonId": {
+            "type": "string"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelOrderItem"
+            }
+          },
+          "total": {
+            "type": "string",
+            "nullable": true
+          },
+          "billing": {
+            "$ref": "#/components/schemas/ReadModelBilling"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrderBilling": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingPayment"
+            }
+          },
+          "usedCreditAmount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrderItem": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ReadModelProductReference"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "unitPrice": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "totalAmount": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "deliveryStatus": {
+            "type": "string"
+          },
+          "observation": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelProductReference": {
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Order",
+    "description": "Replaces de Sales API. Used to register customer orders/sales."
+  }
 }
