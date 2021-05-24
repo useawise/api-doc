@@ -79,7 +79,7 @@
           }
         },
         "summary": "Confirm billing",
-        "description": "If the order was created with billing status \"pending\", then this endpoint will make the billing and create all the financial records for the order."
+        "description": "If the order was created with status other than \"billed\" or \"fulfilled\", then this endpoint will make the billing and create all the financial records for the order."
       }
     },
     "/orders/{id}": {

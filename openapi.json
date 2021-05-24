@@ -39387,7 +39387,7 @@
         "tags": [
           "sales"
         ],
-        "description": "Create a new instance of sales",
+        "description": "DEPRECATED! DO NOT USE FOR NEW INTEGRATION!\nSee Orders API.\n\n\nCreate a new instance of sales.",
         "parameters": [
           {
             "in": "body",
@@ -39767,7 +39767,9 @@
             }
           }
         },
-        "summary": "New Sale"
+        "summary": "New Sale",
+        "operationId": "",
+        "deprecated": true
       }
     },
     "/sales/{id}": {
