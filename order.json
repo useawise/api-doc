@@ -221,7 +221,12 @@
           },
           "status": {
             "type": "string",
-            "format": "string",
+            "enum": [
+              "created",
+              "delivered",
+              "billed",
+              "fulfilled"
+            ],
             "nullable": true
           },
           "cashRegisterId": {
