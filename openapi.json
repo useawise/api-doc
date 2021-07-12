@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API Convess",
+    "title": "API Awise",
     "version": "1.0.0",
-    "description": "![QuantoSobra](https://www.quantosobra.com.br/wp-content/uploads/2016/04/logotipo_fundo_trans_235px-width.png)\n\n## JSON API\n\nA API do Convess segue a especificação do [JSON API][json-api]. O JSON API é uma especificação de como o corpo das requisições e das respostas deve ser formatado. Para ver exemplos completos e mais detalhes sobre o formato utilizado no JSON API, acesse o [website][json-api].\n\n## Autenticação\n\nA autenticação das chamadas para a API é realizada utilizando-se a técnica [HMAC][wiki-hmac]. Com o HMAC, existe uma identificação pública de quem está realizando a chamada para a API e uma chave privada que é utilizada para assinar a mensagem. A chave privada nunca é incluída nas requisições, sendo utilizada apenas para assinar a mensagem. O servidor, conhecendo a chave privada do cliente, calcula a mesma assinatura da mensagem e, caso as assinaturas calculadas sejam iguais, a chave privada utilizada pelo cliente estava correta e, portanto, o acesso é permitido.\n\nPara fazer o acesso à API, é necessário criar uma sessão (ver `POST /sessions`). Uma sessão inclui um `id` e uma `key`. O `id` é a informação pública que deve ser enviada em todas as requisições no cabeçalho, conforme explicado na especificação do [Acquia HTTP HMAC][acquia-hmac]. A `key` deve ser utilizada apenas para assinar a mensagem HMAC e não deve ser enviada nas requisições.\n\nPara identificar a Empresa acessada, deve-se incluir o cabeçalho `X-Company` com o valor sendo o id da empresa. Esse cabeçalho é obrigatório para todas as requisições, exceto APIs de sessões e listagem de empresas.\n\nPara identificar a Filial acessada, deve-se incluir o cabeçalho `X-Branch` com o valor sendo o id da filial. Esse cabeçalho é obrigatório apenas em algumas requisições (ver abaixo), mas será ignorado (sem causar erros) se for enviado nas requisições em que não é obrigatório.\n\nAo implementar a especificação do Acquia HMAC, os seguintes aspectos devem ser observados:\n\n  - Para o campo Provider (realm) deve ser utilizado sempre o valor `Convess`;\n  - A versão utilizada deve ser a 2.0;\n  - O campo `id` do cabeçalho `Authorization` deve ser preenchido com o `id` da sessão;\n  - A `SecretKey` para assinar a mensagem é o valor da `key` da sessão;\n  - Os cabeçalhos `X-Company` e `X-Branch` devem ser adicionados na assinatura como cabeçalhos adicionais (AdditionalSignedHeaders);\n  - Pode ser utilizada uma das [bibliotecas clientes][acquia-hmac-impl] desenvolvidas pelos autores da especificação para assinar as mensagens.\n\n\n[json-api]: http://jsonapi.org/\n[wiki-hmac]: https://en.wikipedia.org/wiki/Hash-based_message_authentication_code\n[acquia-hmac]: https://github.com/acquia/http-hmac-spec\n[acquia-hmac-impl]: https://github.com/acquia/http-hmac-spec#implementations\n",
+    "description": "![QuantoSobra](https://www.quantosobra.com.br/wp-content/uploads/2016/04/logotipo_fundo_trans_235px-width.png)\n\n## JSON API\n\nA API do Awise segue a especificação do [JSON API][json-api]. O JSON API é uma especificação de como o corpo das requisições e das respostas deve ser formatado. Para ver exemplos completos e mais detalhes sobre o formato utilizado no JSON API, acesse o [website][json-api].\n\n## Autenticação\n\nA autenticação das chamadas para a API é realizada utilizando-se a técnica [HMAC][wiki-hmac]. Com o HMAC, existe uma identificação pública de quem está realizando a chamada para a API e uma chave privada que é utilizada para assinar a mensagem. A chave privada nunca é incluída nas requisições, sendo utilizada apenas para assinar a mensagem. O servidor, conhecendo a chave privada do cliente, calcula a mesma assinatura da mensagem e, caso as assinaturas calculadas sejam iguais, a chave privada utilizada pelo cliente estava correta e, portanto, o acesso é permitido.\n\nPara fazer o acesso à API, é necessário criar uma sessão (ver `POST /sessions`). Uma sessão inclui um `id` e uma `key`. O `id` é a informação pública que deve ser enviada em todas as requisições no cabeçalho, conforme explicado na especificação do [Acquia HTTP HMAC][acquia-hmac]. A `key` deve ser utilizada apenas para assinar a mensagem HMAC e não deve ser enviada nas requisições.\n\nPara identificar a Empresa acessada, deve-se incluir o cabeçalho `X-Company` com o valor sendo o id da empresa. Esse cabeçalho é obrigatório para todas as requisições, exceto APIs de sessões e listagem de empresas.\n\nPara identificar a Filial acessada, deve-se incluir o cabeçalho `X-Branch` com o valor sendo o id da filial. Esse cabeçalho é obrigatório apenas em algumas requisições (ver abaixo), mas será ignorado (sem causar erros) se for enviado nas requisições em que não é obrigatório.\n\nAo implementar a especificação do Acquia HMAC, os seguintes aspectos devem ser observados:\n\n  - Para o campo Provider (realm) deve ser utilizado sempre o valor `Awise`;\n  - A versão utilizada deve ser a 2.0;\n  - O campo `id` do cabeçalho `Authorization` deve ser preenchido com o `id` da sessão;\n  - A `SecretKey` para assinar a mensagem é o valor da `key` da sessão;\n  - Os cabeçalhos `X-Company` e `X-Branch` devem ser adicionados na assinatura como cabeçalhos adicionais (AdditionalSignedHeaders);\n  - Pode ser utilizada uma das [bibliotecas clientes][acquia-hmac-impl] desenvolvidas pelos autores da especificação para assinar as mensagens.\n\n\n[json-api]: http://jsonapi.org/\n[wiki-hmac]: https://en.wikipedia.org/wiki/Hash-based_message_authentication_code\n[acquia-hmac]: https://github.com/acquia/http-hmac-spec\n[acquia-hmac-impl]: https://github.com/acquia/http-hmac-spec#implementations\n",
     "termsOfService": "https://www.quantosobra.com.br/termos-de-uso/",
     "contact": {
       "name": "Desenvolvimento QuantoSobra",
@@ -11,7 +11,7 @@
     },
     "license": {}
   },
-  "host": "api.convess.com",
+  "host": "api.useawise.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -39533,7 +39533,7 @@
                   "version": "1.0"
                 },
                 "links": {
-                  "self": "https://api.convess.com/sales/VpjJnd"
+                  "self": "https://api.useawise.com/sales/VpjJnd"
                 },
                 "data": {
                   "type": "sales",
@@ -39551,7 +39551,7 @@
                     "changedDateTime": "2020-10-22T09:27:01+00:00"
                   },
                   "links": {
-                    "self": "https://api.convess.com/sales/VpjJnd"
+                    "self": "https://api.useawise.com/sales/VpjJnd"
                   },
                   "relationships": {
                     "category": {
@@ -39560,8 +39560,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/category",
-                        "related": "https://api.convess.com/sales/VpjJnd/category"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/category",
+                        "related": "https://api.useawise.com/sales/VpjJnd/category"
                       },
                       "data": {
                         "type": "sale-categories",
@@ -39574,8 +39574,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/client",
-                        "related": "https://api.convess.com/sales/VpjJnd/client"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/client",
+                        "related": "https://api.useawise.com/sales/VpjJnd/client"
                       },
                       "data": {
                         "type": "persons",
@@ -39588,8 +39588,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/salesperson",
-                        "related": "https://api.convess.com/sales/VpjJnd/salesperson"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/salesperson",
+                        "related": "https://api.useawise.com/sales/VpjJnd/salesperson"
                       },
                       "data": null
                     },
@@ -39599,8 +39599,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/copyFrom",
-                        "related": "https://api.convess.com/sales/VpjJnd/copyFrom"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/copyFrom",
+                        "related": "https://api.useawise.com/sales/VpjJnd/copyFrom"
                       },
                       "data": null
                     },
@@ -39610,8 +39610,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/copyTo",
-                        "related": "https://api.convess.com/sales/VpjJnd/copyTo"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/copyTo",
+                        "related": "https://api.useawise.com/sales/VpjJnd/copyTo"
                       },
                       "data": []
                     },
@@ -39621,8 +39621,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/originExchange",
-                        "related": "https://api.convess.com/sales/VpjJnd/originExchange"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/originExchange",
+                        "related": "https://api.useawise.com/sales/VpjJnd/originExchange"
                       },
                       "data": null
                     },
@@ -39632,8 +39632,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/items",
-                        "related": "https://api.convess.com/sales/VpjJnd/items"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/items",
+                        "related": "https://api.useawise.com/sales/VpjJnd/items"
                       },
                       "data": [
                         {
@@ -39651,8 +39651,8 @@
                         "readOnly": true
                       },
                       "links": {
-                        "self": "https://api.convess.com/payments/relationships/?generator=VpjJnd",
-                        "related": "https://api.convess.com/payments/?filter[generator]=VpjJnd"
+                        "self": "https://api.useawise.com/payments/relationships/?generator=VpjJnd",
+                        "related": "https://api.useawise.com/payments/?filter[generator]=VpjJnd"
                       },
                       "data": []
                     },
@@ -39665,8 +39665,8 @@
                         "readOnly": true
                       },
                       "links": {
-                        "self": "https://api.convess.com/documentos-fiscais/relationships/?generator=VpjJnd",
-                        "related": "https://api.convess.com/documentos-fiscais/?filter[generator]=VpjJnd"
+                        "self": "https://api.useawise.com/documentos-fiscais/relationships/?generator=VpjJnd",
+                        "related": "https://api.useawise.com/documentos-fiscais/?filter[generator]=VpjJnd"
                       },
                       "data": []
                     },
@@ -39676,8 +39676,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/shipments",
-                        "related": "https://api.convess.com/sales/VpjJnd/shipments"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/shipments",
+                        "related": "https://api.useawise.com/sales/VpjJnd/shipments"
                       },
                       "data": []
                     },
@@ -39687,8 +39687,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/productReturns",
-                        "related": "https://api.convess.com/sales/VpjJnd/productReturns"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/productReturns",
+                        "related": "https://api.useawise.com/sales/VpjJnd/productReturns"
                       },
                       "data": []
                     },
@@ -39701,8 +39701,8 @@
                         "readOnly": true
                       },
                       "links": {
-                        "self": "https://api.convess.com/sale-intents/relationships/?sale=VpjJnd",
-                        "related": "https://api.convess.com/sale-intents/?filter[sale]=VpjJnd"
+                        "self": "https://api.useawise.com/sale-intents/relationships/?sale=VpjJnd",
+                        "related": "https://api.useawise.com/sale-intents/?filter[sale]=VpjJnd"
                       },
                       "data": []
                     },
@@ -39712,8 +39712,8 @@
                         "readOnly": false
                       },
                       "links": {
-                        "self": "https://api.convess.com/sales/VpjJnd/relationships/companyUser",
-                        "related": "https://api.convess.com/sales/VpjJnd/companyUser"
+                        "self": "https://api.useawise.com/sales/VpjJnd/relationships/companyUser",
+                        "related": "https://api.useawise.com/sales/VpjJnd/companyUser"
                       },
                       "data": {
                         "type": "company-users",
