@@ -432,7 +432,8 @@
                     "compensationDate": {
                         "type": "string",
                         "format": "date",
-                        "nullable": true
+                        "nullable": true,
+                        "deprecated": true
                     },
                     "compensationDateTime": {
                         "type": "string",
