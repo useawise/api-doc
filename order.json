@@ -347,13 +347,11 @@
                 "properties": {
                     "value": {
                         "type": "string",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "dueDate": {
                         "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "compensationDate": {
                         "type": "string",
@@ -378,8 +376,7 @@
                         "enum": [
                             "on_order",
                             "in_installments"
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "installments": {
                         "type": "array",
@@ -401,7 +398,7 @@
                 },
                 "type": "object"
             },
-            "ApplicationBilling": {
+            "CreateOrderBilling": {
                 "properties": {
                     "usedCreditValue": {
                         "type": "string",
@@ -411,23 +408,21 @@
                     "payments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ApplicationBillingPayment"
+                            "$ref": "#/components/schemas/CreateOrderBillingPayment"
                         }
                     }
                 },
                 "type": "object"
             },
-            "ApplicationBillingInstallment": {
+            "CreateOrderBillingInstallment": {
                 "properties": {
                     "value": {
                         "type": "string",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "dueDate": {
                         "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "compensationDate": {
                         "type": "string",
@@ -443,7 +438,7 @@
                 },
                 "type": "object"
             },
-            "ApplicationBillingPayment": {
+            "CreateOrderBillingPayment": {
                 "properties": {
                     "paymentConfigurationId": {
                         "type": "string"
@@ -453,57 +448,13 @@
                         "enum": [
                             "on_order",
                             "in_installments"
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "installments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ApplicationBillingInstallment"
+                            "$ref": "#/components/schemas/CreateOrderBillingInstallment"
                         }
-                    }
-                },
-                "type": "object"
-            },
-            "ConfirmSaleIntentsCommand": {
-                "properties": {
-                    "saleIntentsIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "discount": {
-                        "description": "Order discount.",
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/ApplicationBilling"
-                    },
-                    "status": {
-                        "type": "string",
-                        "format": "string",
-                        "nullable": true
-                    },
-                    "cashRegisterId": {
-                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -511,6 +462,11 @@
             "CreateOrderCommand": {
                 "properties": {
                     "customerId": {
+                        "description": "ID of order customer. See Person API.",
+                        "type": "string"
+                    },
+                    "nationalIdNum": {
+                        "description": "Alternative to customerId. Uses a unique national identifier (i.e. CPF in\nBrazil) to inform the customer. If no customer with this identifier is\nfound, then a customer is created, otherwise the order uses the\ncustomer already created in Awise. This property will be ignored if a\ncustomerId is present.",
                         "type": "string"
                     },
                     "salespersonId": {
@@ -518,8 +474,7 @@
                     },
                     "accrualDateTime": {
                         "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "observation": {
                         "type": "string",
@@ -547,13 +502,20 @@
                         "nullable": true
                     },
                     "discountValue": {
-                        "description": "Total order discount. Sum of all individual item discount added to general order discount,\n     *     if any.",
+                        "description": "Total order discount. Sum of all individual item discount added to general order discount, if any. All\nindividual items discounts are replaced by discountValue proportionaly divided by items value.",
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true,
+                        "deprecated": true
+                    },
+                    "discount": {
+                        "description": "Order discount value. This value is proportionaly divided by items value and then added to individual items\ndiscount value.",
                         "type": "string",
                         "format": "decimal",
                         "nullable": true
                     },
                     "billing": {
-                        "$ref": "#/components/schemas/ApplicationBilling"
+                        "$ref": "#/components/schemas/CreateOrderBilling"
                     },
                     "status": {
                         "type": "string",
@@ -577,12 +539,12 @@
             "ApplicationOrderItem": {
                 "properties": {
                     "productId": {
+                        "description": "Awise Product ID. See Product API.",
                         "type": "string"
                     },
                     "quantity": {
                         "type": "string",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "deliveryStatus": {
                         "type": "string",
@@ -590,13 +552,11 @@
                             "reserved",
                             "delivered",
                             "partial"
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "unitPrice": {
                         "type": "string",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "discount": {
                         "type": "string",
@@ -606,6 +566,10 @@
                     "observation": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "productCode": {
+                        "description": "Alternative to productId. Uses the poduct code (i.e. SKU) to identify\nthe product in the order. The product must be previously created in\nAwise to be found. This property will be ignored if productId is\npresent.",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -624,6 +588,109 @@
                 "type": "object"
             },
             "AccomplishSaleIntentCommand": {},
+            "ConfirmSaleIntentsBilling": {
+                "properties": {
+                    "usedCreditValue": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "payments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ConfirmSaleIntentsBillingPayment"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ConfirmSaleIntentsBillingInstallment": {
+                "properties": {
+                    "value": {
+                        "type": "string",
+                        "format": "decimal"
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "compensationDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true,
+                        "deprecated": true
+                    },
+                    "compensationDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ConfirmSaleIntentsBillingPayment": {
+                "properties": {
+                    "paymentConfigurationId": {
+                        "type": "string"
+                    },
+                    "paymentCondition": {
+                        "type": "string",
+                        "enum": [
+                            "on_order",
+                            "in_installments"
+                        ]
+                    },
+                    "installments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ConfirmSaleIntentsBillingInstallment"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ConfirmSaleIntentsCommand": {
+                "properties": {
+                    "saleIntentsIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "salespersonId": {
+                        "type": "string"
+                    },
+                    "accrualDateTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "observation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "discount": {
+                        "description": "Order discount.",
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "billing": {
+                        "$ref": "#/components/schemas/ConfirmSaleIntentsBilling"
+                    },
+                    "status": {
+                        "type": "string",
+                        "format": "string",
+                        "nullable": true
+                    },
+                    "cashRegisterId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ReopenSaleIntentsCommand": {
                 "properties": {
                     "saleIntentsIds": {
@@ -917,7 +984,7 @@
         }
     },
     "info": {
-      "title": "Order",
-      "description": "Replaces de Sales API. Used to register customer orders/sales."
+        "title": "Order",
+        "description": "Replaces de Sales API. Used to register customer orders/sales."
     }
 }
