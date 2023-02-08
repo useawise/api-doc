@@ -225,7 +225,12 @@
             "WebhookEvent": {
                 "type": "string",
                 "enum": [
-                    "PRODUCT_STOCK_CHANGED"
+                    "PRODUCT_STOCK_CHANGED",
+                    "PRODUCT_CREATED",
+                    "PRODUCT_CHANGED",
+                    "META_PRODUCT_CREATED",
+                    "META_PRODUCT_CHANGED",
+                    "PRICE_CHANGED"
                 ]
             },
             "WebhookConfig": {
