@@ -1,320 +1,325 @@
 {
-    "openapi": "3.0.0",
-    "paths": {
-        "/v2/products": {
-            "post": {
-                "operationId": "V2_CreateBulkProduct",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/V2_CreateBulkProduct"
+  "openapi": "3.0.0",
+  "paths": {
+    "/v2/products": {
+      "post": {
+        "operationId": "V2_CreateBulkProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/V2_CreateBulkProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "metaProductId": {
+                            "type": "string"
+                          },
+                          "variations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
                             }
-                        }
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
                     }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "metaProductId": {
-                                                        "type": "string"
-                                                    },
-                                                    "variations": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string"
-                                                        }
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
+                  },
+                  "type": "object"
                 }
+              }
             }
-        }
-    },
-    "components": {
-        "schemas": {
-            "V2_CreateBulkProduct_SupplierReference": {
-                "properties": {
-                    "supplierId": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "referenceType": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "referenceValue": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_BranchProductFiscalProperties": {
-                "properties": {
-                    "branchId": {
-                        "description": "If null, defaults to current branch",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "baseCalculoFCPRetidoAnteriormente": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "baseCalculoIcmsStUnitario": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "valorIcmsStUnitario": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_CostValues": {
-                "properties": {
-                    "branchId": {
-                        "description": "If null, defaults to current branch",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "cost": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "costBreakdown": {
-                        "description": "Key-value pairs where key is an identifier for the cost part and value is the repective value",
-                        "type": "object",
-                        "nullable": true,
-                        "additionalProperties": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct": {
-                "properties": {
-                    "products": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_Product"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_PriceValues": {
-                "properties": {
-                    "priceTableId": {
-                        "description": "If null, will use the default for current branch",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "price": {
-                        "type": "string"
-                    },
-                    "margin": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_Product": {
-                "properties": {
-                    "brand": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unit": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "groupId": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "variants": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "variations": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_Variation"
-                        }
-                    },
-                    "fiscalProperties": {
-                        "nullable": true,
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/V2_CreateBulkProduct_ProductFiscalProperties"
-                            }
-                        ]
-                    },
-                    "branchFiscalProperties": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_BranchProductFiscalProperties"
-                        }
-                    },
-                    "images": {
-                        "description": "Image data encoded as base64",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_ProductFiscalProperties": {
-                "properties": {
-                    "ncm": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "cest": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "cnpjManufacturer": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_StockValues": {
-                "properties": {
-                    "stockLocationId": {
-                        "description": "If null, will use the default for current branch",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "minimumStock": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "maximumStock": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "currentStock": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateBulkProduct_Variation": {
-                "properties": {
-                    "grossWeight": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "netWeight": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "height": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "width": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "depth": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "barcode": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "code": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "supplierReferences": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_SupplierReference"
-                        },
-                        "nullable": true
-                    },
-                    "variations": {
-                        "description": "Key-value pairs where key is a variantId and value is the value for the respective variant",
-                        "type": "object",
-                        "nullable": true,
-                        "additionalProperties": {
-                            "type": "string"
-                        }
-                    },
-                    "costValues": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_CostValues"
-                        }
-                    },
-                    "priceValues": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_PriceValues"
-                        },
-                        "nullable": true
-                    },
-                    "imagesIndexes": {
-                        "description": "Image index from product images",
-                        "type": "array",
-                        "items": {
-                            "type": "integer"
-                        },
-                        "nullable": true
-                    },
-                    "stockValues": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateBulkProduct_StockValues"
-                        },
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            }
-        }
+          }
+        },
+        "description": "This endpoint allows the creation of a product with all associated info in one request. It's also capable of bulk creation of multiple unrelated products in a the same request.",
+        "summary": "Create Product (v2)"
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "V2_CreateBulkProduct_SupplierReference": {
+        "properties": {
+          "supplierId": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceType": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_BranchProductFiscalProperties": {
+        "properties": {
+          "branchId": {
+            "description": "If null, defaults to current branch",
+            "type": "string",
+            "nullable": true
+          },
+          "baseCalculoFCPRetidoAnteriormente": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseCalculoIcmsStUnitario": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorIcmsStUnitario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_CostValues": {
+        "properties": {
+          "branchId": {
+            "description": "If null, defaults to current branch",
+            "type": "string",
+            "nullable": true
+          },
+          "cost": {
+            "type": "string",
+            "nullable": true
+          },
+          "costBreakdown": {
+            "description": "Key-value pairs where key is an identifier for the cost part and value is the repective value",
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct": {
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_Product"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_PriceValues": {
+        "properties": {
+          "priceTableId": {
+            "description": "If null, will use the default for current branch",
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "string"
+          },
+          "margin": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_Product": {
+        "properties": {
+          "brand": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupId": {
+            "type": "string",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "variations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_Variation"
+            }
+          },
+          "fiscalProperties": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/V2_CreateBulkProduct_ProductFiscalProperties"
+              }
+            ]
+          },
+          "branchFiscalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_BranchProductFiscalProperties"
+            }
+          },
+          "images": {
+            "description": "Image data encoded as base64",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_ProductFiscalProperties": {
+        "properties": {
+          "ncm": {
+            "type": "string",
+            "nullable": true
+          },
+          "cest": {
+            "type": "string",
+            "nullable": true
+          },
+          "cnpjManufacturer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_StockValues": {
+        "properties": {
+          "stockLocationId": {
+            "description": "If null, will use the default for current branch",
+            "type": "string",
+            "nullable": true
+          },
+          "minimumStock": {
+            "type": "string",
+            "nullable": true
+          },
+          "maximumStock": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentStock": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateBulkProduct_Variation": {
+        "properties": {
+          "grossWeight": {
+            "type": "string",
+            "nullable": true
+          },
+          "netWeight": {
+            "type": "string",
+            "nullable": true
+          },
+          "height": {
+            "type": "string",
+            "nullable": true
+          },
+          "width": {
+            "type": "string",
+            "nullable": true
+          },
+          "depth": {
+            "type": "string",
+            "nullable": true
+          },
+          "barcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "supplierReferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_SupplierReference"
+            },
+            "nullable": true
+          },
+          "variations": {
+            "description": "Key-value pairs where key is a variantId and value is the value for the respective variant",
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "costValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_CostValues"
+            }
+          },
+          "priceValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_PriceValues"
+            },
+            "nullable": true
+          },
+          "imagesIndexes": {
+            "description": "Image index from product images",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "nullable": true
+          },
+          "stockValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateBulkProduct_StockValues"
+            },
+            "nullable": true
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Products v2"
+  }
 }
