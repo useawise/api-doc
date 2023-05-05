@@ -228,8 +228,10 @@
                     "PRODUCT_STOCK_CHANGED",
                     "PRODUCT_CREATED",
                     "PRODUCT_CHANGED",
+                    "PRODUCT_REMOVED",
                     "META_PRODUCT_CREATED",
                     "META_PRODUCT_CHANGED",
+                    "META_PRODUCT_REMOVED",
                     "PRICE_CHANGED"
                 ]
             },
