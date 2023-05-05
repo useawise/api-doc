@@ -33028,7 +33028,7 @@
         "tags": [
           "products"
         ],
-        "description": "Create a new instance of products",
+        "description": "DEPRECATED: see Create Product (v2)\n\nCreate a new instance of products",
         "parameters": [
           {
             "in": "body",
@@ -33105,7 +33105,8 @@
               "$ref": "#/definitions/error"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/products/{id}": {
