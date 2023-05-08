@@ -38421,13 +38421,14 @@
               "$ref": "#/definitions/error"
             }
           }
-        }
+        },
+        "operationId": ""
       },
       "post": {
         "tags": [
           "sale-intents"
         ],
-        "description": "Create a new instance of sale-intents",
+        "description": "Deprecated. See sale-intent v2.\nCreate a new instance of sale-intents",
         "parameters": [
           {
             "in": "body",
@@ -38504,7 +38505,9 @@
               "$ref": "#/definitions/error"
             }
           }
-        }
+        },
+        "operationId": "",
+        "deprecated": true
       }
     },
     "/sale-intents/{id}": {
