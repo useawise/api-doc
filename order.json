@@ -184,6 +184,48 @@
                         "description": "Not found"
                     }
                 }
+            },
+            "patch": {
+                "operationId": "editOrder",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EditOrderCommand"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ReadModelOrder"
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/sales/{id}": {
@@ -314,6 +356,45 @@
                                     "properties": {
                                         "success": {
                                             "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/sale-intents": {
+            "post": {
+                "operationId": "V2_CreateSaleIntent",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V2_CreateSaleIntent"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "saleIntent": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -671,6 +752,21 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "shipmentCosts": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "insuranceValue": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "otherExpensesValue": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
                     "discount": {
                         "description": "Order discount.",
                         "type": "string",
@@ -698,6 +794,65 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "V2_CreateSaleIntent": {
+                "properties": {
+                    "accrualDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "client": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/V2_CreateSaleIntent_SaleIntentItem"
+                        }
+                    },
+                    "observation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "salesperson": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "V2_CreateSaleIntent_SaleIntentItem": {
+                "properties": {
+                    "discountValue": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "product": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "productName": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "unitValue": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -730,7 +885,7 @@
                     },
                     "dueDate": {
                         "type": "string",
-                        "format": "date-time",
+                        "format": "date",
                         "nullable": true
                     },
                     "amount": {
@@ -762,6 +917,9 @@
             },
             "ReadModelOrder": {
                 "properties": {
+                    "isEditable": {
+                        "type": "boolean"
+                    },
                     "id": {
                         "type": "string"
                     },
@@ -770,6 +928,9 @@
                     },
                     "company": {
                         "type": "string"
+                    },
+                    "orderNumber": {
+                        "type": "integer"
                     },
                     "customerId": {
                         "type": "string"
@@ -795,11 +956,36 @@
                         }
                     },
                     "total": {
-                        "type": "string",
-                        "nullable": true
+                        "$ref": "#/components/schemas/ReadModelOrderAmount"
                     },
                     "billing": {
                         "$ref": "#/components/schemas/ReadModelBilling"
+                    },
+                    "companyUserId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ReadModelOrderAmount": {
+                "properties": {
+                    "itemsTotal": {
+                        "type": "string"
+                    },
+                    "shipment": {
+                        "type": "string"
+                    },
+                    "insurance": {
+                        "type": "string"
+                    },
+                    "otherExpenses": {
+                        "type": "string"
+                    },
+                    "discount": {
+                        "type": "string"
+                    },
+                    "orderTotal": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -860,6 +1046,10 @@
                     },
                     "observation": {
                         "type": "string"
+                    },
+                    "discount": {
+                        "type": "string",
+                        "format": "decimal"
                     }
                 },
                 "type": "object"
@@ -934,6 +1124,9 @@
                         "type": "string"
                     },
                     "branch": {
+                        "type": "string"
+                    },
+                    "companyUser": {
                         "type": "string"
                     }
                 },
