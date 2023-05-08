@@ -609,6 +609,7 @@
                         "nullable": true
                     },
                     "cashRegisterId": {
+                        "description": "Id of the cash register if there is one open",
                         "type": "string"
                     },
                     "originExchangeId": {
@@ -650,6 +651,76 @@
                     },
                     "productCode": {
                         "description": "Alternative to productId. Uses the poduct code (i.e. SKU) to identify\nthe product in the order. The product must be previously created in\nAwise to be found. This property will be ignored if productId is\npresent.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EditOrderCommand": {
+                "properties": {
+                    "customerId": {
+                        "description": "ID of order customer. See Person API.",
+                        "type": "string"
+                    },
+                    "nationalIdNum": {
+                        "description": "Alternative to customerId. Uses a unique national identifier (i.e. CPF in\nBrazil) to inform the customer. If no customer with this identifier is\nfound, then a customer is created, otherwise the order uses the\ncustomer already created in Awise. This property will be ignored if a\ncustomerId is present.",
+                        "type": "string"
+                    },
+                    "salespersonId": {
+                        "description": "ID of the salesperson who made the order. See Person API.",
+                        "type": "string"
+                    },
+                    "accrualDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "observation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "shipmentCosts": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "insuranceValue": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "otherExpensesValue": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "discount": {
+                        "description": "Order discount value. This value is proportionaly divided by items value and then added to individual items\ndiscount value.",
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "created",
+                            "delivered",
+                            "billed",
+                            "fulfilled"
+                        ],
+                        "nullable": true
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ApplicationOrderItem"
+                        }
+                    },
+                    "billing": {
+                        "$ref": "#/components/schemas/CreateOrderBilling"
+                    },
+                    "cashRegisterId": {
+                        "description": "Id of the cash register if there is one open",
                         "type": "string"
                     }
                 },
