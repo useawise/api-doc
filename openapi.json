@@ -49971,6 +49971,2192 @@
           }
         }
       }
+    },
+    "/meta-products": {
+      "get": {
+        "tags": [
+          "meta-products"
+        ],
+        "description": "Search for meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "meta-products search response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/meta-products"
+                  }
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "meta-products"
+        ],
+        "description": "Create a new instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/definitions/meta-products"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "meta-products create response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/meta-products"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}": {
+      "get": {
+        "tags": [
+          "meta-products"
+        ],
+        "description": "Get a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "meta-products find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/meta-products"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "meta-products"
+        ],
+        "description": "Delete an instance of meta-products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "meta-products delete response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "meta-products"
+        ],
+        "description": "Update an instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/definitions/meta-products"
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "meta-products update response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/meta-products"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/products": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "Get the products instances of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "products find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/products"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/relationships/products": {
+      "get": {
+        "tags": [
+          "products",
+          "meta-products"
+        ],
+        "description": "Get the products relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "products find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "products",
+          "meta-products"
+        ],
+        "description": "Create the products relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "products create response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "products",
+          "meta-products"
+        ],
+        "description": "Update the products relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "products update response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "products",
+          "meta-products"
+        ],
+        "description": "Delete the products relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "products delete response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/groupId": {
+      "get": {
+        "tags": [
+          "product-groups"
+        ],
+        "description": "Get the groupId instance of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "product-groups find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/product-groups"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/relationships/groupId": {
+      "get": {
+        "tags": [
+          "product-groups",
+          "meta-products"
+        ],
+        "description": "Get the groupId relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "product-groups find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "product-groups",
+          "meta-products"
+        ],
+        "description": "Create the groupId relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "product-groups create response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "product-groups",
+          "meta-products"
+        ],
+        "description": "Update the groupId relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "product-groups update response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "product-groups",
+          "meta-products"
+        ],
+        "description": "Delete the groupId relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "product-groups delete response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/company": {
+      "get": {
+        "tags": [
+          "companies"
+        ],
+        "description": "Get the company instance of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "companies find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "$ref": "#/definitions/companies"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/meta-products/{id}/relationships/company": {
+      "get": {
+        "tags": [
+          "companies",
+          "meta-products"
+        ],
+        "description": "Get the company relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/include"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/fields"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "companies find response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "companies",
+          "meta-products"
+        ],
+        "description": "Create the company relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "companies create response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "companies",
+          "meta-products"
+        ],
+        "description": "Update the company relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "companies update response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "companies",
+          "meta-products"
+        ],
+        "description": "Delete the company relationship of a specific instance of meta-products",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New or partial resource",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of specific instance to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "companies delete response",
+            "schema": {
+              "type": "object",
+              "required": [
+                "jsonapi",
+                "meta",
+                "links"
+              ],
+              "properties": {
+                "jsonapi": {
+                  "type": "object",
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "required": [
+                    "self"
+                  ],
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "first": {
+                      "type": "string"
+                    },
+                    "last": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "string"
+                    },
+                    "prev": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -67927,6 +70113,179 @@
               }
             }
           }
+        }
+      }
+    },
+    "meta-products": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "variants": {
+              "type": "array"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            },
+            "observation": {
+              "type": "string"
+            },
+            "createdDateTime": {
+              "type": "string"
+            },
+            "changedDateTime": {
+              "type": "string"
+            },
+            "removedDateTime": {
+              "type": "string"
+            }
+          }
+        },
+        "relationships": {
+          "type": "object",
+          "properties": {
+            "products": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "related": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "id"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "meta": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "groupId": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "related": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            },
+            "company": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "type": "object"
+                },
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "related": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "id"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string"
+            }
+          }
+        },
+        "meta": {
+          "type": "object"
         }
       }
     }
