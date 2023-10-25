@@ -1,6 +1,37 @@
 {
     "openapi": "3.0.0",
     "paths": {
+        "/coupons": {
+            "post": {
+                "operationId": "createCoupon",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCouponCommand"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/orders": {
             "get": {
                 "operationId": "SearchOrders",
@@ -45,6 +76,43 @@
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ReadModelOrder"
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/bulk-remove": {
+            "post": {
+                "operationId": "bulkDeleteOrder",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteOrdersCommand"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
                                         },
                                         "success": {
                                             "type": "boolean"
@@ -185,6 +253,27 @@
                     }
                 }
             },
+            "delete": {
+                "operationId": "DeleteOrder",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
             "patch": {
                 "operationId": "editOrder",
                 "parameters": [
@@ -216,6 +305,47 @@
                                         "data": {
                                             "$ref": "#/components/schemas/ReadModelOrder"
                                         },
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{id}/shipping": {
+            "patch": {
+                "operationId": "updateOrderShipping",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateOrderShipping"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
                                         "success": {
                                             "type": "boolean"
                                         }
@@ -408,6 +538,37 @@
     },
     "components": {
         "schemas": {
+            "CreateCouponCommand": {
+                "properties": {
+                    "code": {
+                        "description": "A unique code identifying this coupon.",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "description": "Optional. Used to restrict the usage of this coupon to a specific customer.\nWhen informed, must be a valid person id. See Person API.",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "expiresAt": {
+                        "description": "Optional. If informed, the coupon can only be used before the specified date.\nUse ISO-8601 format and UTC timezone.",
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "valueType": {
+                        "description": "Specifies how the value should be used. Currently, the only option is\n\"fixed_value\" and the value must be specified as a fixed value in the\ncompany's currency.",
+                        "type": "string",
+                        "enum": [
+                            "fixed_value"
+                        ]
+                    },
+                    "value": {
+                        "description": "Discount value. See docs on the valueType attribute for details.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Order_ConfirmBilling_Billing": {
                 "properties": {
                     "usedCreditValue": {
@@ -464,6 +625,9 @@
                         "items": {
                             "$ref": "#/components/schemas/Order_ConfirmBilling_BillingInstallment"
                         }
+                    },
+                    "tef": {
+                        "$ref": "#/components/schemas/Order_ConfirmBilling_BillingPayment_Tef"
                     }
                 },
                 "type": "object"
@@ -475,6 +639,26 @@
                     },
                     "billing": {
                         "$ref": "#/components/schemas/Order_ConfirmBilling_Billing"
+                    }
+                },
+                "type": "object"
+            },
+            "Order_ConfirmBilling_BillingPayment_Tef": {
+                "properties": {
+                    "networkCnpj": {
+                        "type": "string"
+                    },
+                    "administratorName": {
+                        "type": "string"
+                    },
+                    "nsu": {
+                        "type": "string"
+                    },
+                    "pspId": {
+                        "type": "string"
+                    },
+                    "chargeId": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -536,6 +720,9 @@
                         "items": {
                             "$ref": "#/components/schemas/CreateOrderBillingInstallment"
                         }
+                    },
+                    "tef": {
+                        "$ref": "#/components/schemas/CreateOrder_BillingPayment_Tef"
                     }
                 },
                 "type": "object"
@@ -609,11 +796,38 @@
                         "nullable": true
                     },
                     "cashRegisterId": {
-                        "description": "Id of the cash register if there is one open",
                         "type": "string"
                     },
                     "originExchangeId": {
                         "type": "string"
+                    },
+                    "source": {
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "nullable": false
+                            },
+                            "data": {
+                                "type": "object",
+                                "nullable": true,
+                                "additionalProperties": {
+                                    "nullable": true,
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "type": "object",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -656,72 +870,39 @@
                 },
                 "type": "object"
             },
-            "EditOrderCommand": {
+            "CreateOrder_BillingPayment_Tef": {
                 "properties": {
-                    "customerId": {
-                        "description": "ID of order customer. See Person API.",
+                    "networkCnpj": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "administratorName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nsu": {
                         "type": "string"
                     },
-                    "nationalIdNum": {
-                        "description": "Alternative to customerId. Uses a unique national identifier (i.e. CPF in\nBrazil) to inform the customer. If no customer with this identifier is\nfound, then a customer is created, otherwise the order uses the\ncustomer already created in Awise. This property will be ignored if a\ncustomerId is present.",
+                    "pspId": {
                         "type": "string"
                     },
-                    "salespersonId": {
-                        "description": "ID of the salesperson who made the order. See Person API.",
+                    "chargeId": {
                         "type": "string"
                     },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
+                    "pixId": {
                         "type": "string",
                         "nullable": true
-                    },
-                    "shipmentCosts": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "insuranceValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "otherExpensesValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "discount": {
-                        "description": "Order discount value. This value is proportionaly divided by items value and then added to individual items\ndiscount value.",
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "created",
-                            "delivered",
-                            "billed",
-                            "fulfilled"
-                        ],
-                        "nullable": true
-                    },
-                    "items": {
+                    }
+                },
+                "type": "object"
+            },
+            "DeleteOrdersCommand": {
+                "properties": {
+                    "orderIds": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ApplicationOrderItem"
+                            "type": "string"
                         }
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/CreateOrderBilling"
-                    },
-                    "cashRegisterId": {
-                        "description": "Id of the cash register if there is one open",
-                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -734,6 +915,32 @@
                             "NFe",
                             "NFCe"
                         ],
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOrderShipping": {
+                "properties": {
+                    "status": {
+                        "description": "- cr = created\n- ca = canceled\n- pa = packing\n- rs = ready to ship\n- it = in transit\n- de = delivered",
+                        "type": "string",
+                        "enum": [
+                            "cr",
+                            "ca",
+                            "pa",
+                            "rs",
+                            "it",
+                            "de"
+                        ],
+                        "nullable": false
+                    },
+                    "trackingCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "trackingUrl": {
+                        "type": "string",
                         "nullable": true
                     }
                 },
@@ -982,6 +1189,9 @@
                         "items": {
                             "$ref": "#/components/schemas/ReadModelBillingInstallment"
                         }
+                    },
+                    "tef": {
+                        "$ref": "#/components/schemas/ReadModel_BillingPayment_Tef"
                     }
                 },
                 "type": "object"
@@ -990,6 +1200,34 @@
                 "properties": {
                     "isEditable": {
                         "type": "boolean"
+                    },
+                    "source": {
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "nullable": false
+                            },
+                            "data": {
+                                "type": "object",
+                                "nullable": true,
+                                "additionalProperties": {
+                                    "nullable": true,
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "type": "object",
+                        "nullable": true
                     },
                     "id": {
                         "type": "string"
@@ -1001,6 +1239,7 @@
                         "type": "string"
                     },
                     "orderNumber": {
+                        "description": "Com php7 era retornado como string mesmo estando tipado como int, com php8 retorna int corretamente,\nmas quebra o financial-entries, que espera string, por isso foi adicionado @JSON\\Type(\"string\")",
                         "type": "integer"
                     },
                     "customerId": {
@@ -1034,6 +1273,18 @@
                     },
                     "companyUserId": {
                         "type": "string"
+                    },
+                    "removedDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "coupons": {
+                        "description": "List with the code of discount coupons used in this order, if any. See Coupons api.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "type": "object"
@@ -1141,6 +1392,35 @@
                     },
                     "unit": {
                         "type": "string"
+                    },
+                    "cost": {
+                        "type": "string",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ReadModel_BillingPayment_Tef": {
+                "properties": {
+                    "networkCnpj": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "administratorName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nsu": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "pspId": {
+                        "type": "string"
+                    },
+                    "chargeId": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"
