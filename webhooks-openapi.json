@@ -1,283 +1,667 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "AWISE Webhooks API ",
-    "version": "1.0.0",
-    "description": "AWISE Webhooks API",
-    "termsOfService": "https://www.quantosobra.com.br/termos-de-uso/",
-    "contact": {
-      "name": "Desenvolvimento QuantoSobra",
-      "email": "devs@quantosobra.com.br"
+    "openapi": "3.0.0",
+    "info": {
+        "title": "AWISE Webhooks API ",
+        "version": "1.0.0",
+        "description": "AWISE Webhooks API",
+        "termsOfService": "https://www.quantosobra.com.br/termos-de-uso/",
+        "contact": {
+            "name": "Desenvolvimento QuantoSobra",
+            "email": "devs@quantosobra.com.br"
+        },
+        "license": {
+            "name": ""
+        }
     },
-    "license": {
-      "name": ""
-    }
-  },
-  "paths": {
-    "/webhooks": {
-      "get": {
-        "operationId": "ListWebhooks",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/WebhookConfig"
-                      }
+    "paths": {
+        "/webhooks": {
+            "get": {
+                "operationId": "ListWebhooks",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookConfig"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                  },
-                  "type": "object"
                 }
-              }
-            }
-          }
-        },
-        "description": "Example webhook events\n\n{\"event\":\"PRODUCT_REMOVED\",\"data\":{\"companyId\":\"1bgobe\",\"id\":\"zxaGAk\",\"metaProductId\":\"1bdVJV\",\"name\":\"Soccer ball\"},\"timestamp\":\"2023-06-30T18:51:49Z\"}\n\n{\"event\":\"META_PRODUCT_REMOVED\",\"data\":{\"companyId\":\"1bgobe\",\"id\":\"1bdVJV\"},\"timestamp\":\"2023-06-30T18:51:49Z\"}\n\n{\"event\":\"META_PRODUCT_CREATED\",\"data\":{\"brand\":\"Nike\",\"companyId\":\"1bgobe\",\"id\":\"lbV6bB\",\"name\":\"Soccer ball\",\"unit\":\"UN\",\"variants\":[]},\"timestamp\":\"2023-06-30T18:53:01Z\"}\n\n{\"event\":\"PRODUCT_CREATED\",\"data\":{\"barCode\":\"2540600000263\",\"code\":\"Tvs40680001\",\"id\":\"XxG1Al\",\"imagesUrl\":[],\"metaProductId\":\"lbV6bB\",\"name\":\"Soccer ball\",\"purpose\":\"sa\",\"unit\":\"UN\",\"variations\":[],\"companyId\":\"1bgobe\"},\"timestamp\":\"2023-06-30T18:53:01Z\"}\n\n{\"event\":\"PRODUCT_CHANGED\",\"data\":{\"barCode\":\"2540600000263\",\"code\":\"Tvs40680001\",\"grossWeight\":\"0.0000\",\"id\":\"XxG1Al\",\"metaProductId\":\"lbV6bB\",\"name\":\"Soccer ball\",\"netWeight\":\"0.0000\",\"purpose\":\"sa\",\"unit\":\"UN\",\"companyId\":\"1bgobe\"},\"timestamp\":\"2023-06-30T18:53:28Z\"}\n\n{\"event\":\"META_PRODUCT_CHANGED\",\"data\":{\"brand\":\"Nike\",\"code\":\"Tvs4068\",\"id\":\"lbV6bB\",\"name\":\"Soccer ball\",\"unit\":\"UN\",\"variants\":[],\"companyId\":\"1bgobe\"},\"timestamp\":\"2023-06-30T18:53:28Z\"}\n\n{\"event\":\"PRODUCT_STOCK_CHANGED\",\"data\":{\"product\":\"XxG1Al\",\"stockLocation\":\"oxyMxv\",\"availableStock\":\"100.0000\",\"companyId\":\"1bgobe\",\"branchId\":\"1bgobe\"},\"timestamp\":\"2023-06-30T18:54:07Z\"}\n\n{\"event\":\"PRICE_CHANGED\",\"data\":{\"id\":\"XxG1Al\",\"metaProductId\":\"lbV6bB\",\"name\":\"Soccer ball\",\"price\":\"150.00\",\"companyId\":\"1bgobe\",\"branchId\":\"1bgobe\"},\"timestamp\":\"2023-06-30T18:54:07Z\"}\n\n{\"event\":\"SHIPMENT_STATUS_CHANGED\",\"data\":{\"companyId\":\"1bgobe\",\"branchId\":\"1bgobe\",\"id\":\"VAmjbd\",\"order\":\"wxp9J1\",\"previousStatus\":\"in_transport\",\"currentStatus\":\"delivered\",\"deliveryMethod\":\"pickup\"},\"timestamp\":\"2023-06-30T18:55:06Z\"}\n\n{\"event\":\"ORDER_REMOVED\",\"data\":{\"companyId\":\"1bgobe\",\"branchId\":\"1bgobe\",\"id\":\"Ob91b2\"},\"timestamp\":\"2023-06-30T18:55:24Z\"}"
-      },
-      "post": {
-        "operationId": "CreateWebhook",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateWebhookCommand"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Validation error"
-          }
-        },
-        "callbacks": {
-          "webhook": {
-            "{$request.body#/url}": {
-              "post": {
+            },
+            "post": {
+                "operationId": "CreateWebhook",
                 "requestBody": {
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/WebhookPayload"
-                      }
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWebhookCommand"
+                            }
+                        }
                     }
-                  }
                 },
                 "responses": {
-                  "2XX": {
-                    "description": "Webhook was processed successfully"
-                  },
-                  "default": {
-                    "description": "Webhook will be scheduled to be sent again after 3 hours"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/webhooks/{id}": {
-      "get": {
-        "operationId": "FindWebhook",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/WebhookConfig"
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Validation error"
                     }
-                  },
-                  "type": "object"
+                },
+                "callbacks": {
+                    "webhook": {
+                        "{$request.body#/url}": {
+                            "post": {
+                                "requestBody": {
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/WebhookPayload"
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "2XX": {
+                                        "description": "Webhook was processed successfully"
+                                    },
+                                    "default": {
+                                        "description": "Webhook will be scheduled to be sent again after 3 hours"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          },
-          "404": {
-            "description": "Not found"
-          }
+        },
+        "/webhooks/{id}": {
+            "get": {
+                "operationId": "FindWebhook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookConfig"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DeleteWebhook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "UpdateWebhook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWebhookCommand"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                }
+            }
         }
-      },
-      "delete": {
-        "operationId": "DeleteWebhook",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+    },
+    "components": {
+        "schemas": {
+            "CreateWebhookCommand": {
+                "required": [
+                    "url",
+                    "events"
+                ],
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "maxLength": 500,
+                        "nullable": true
+                    },
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WebhookEvent"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateWebhookCommand": {
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "maxLength": 500,
+                        "nullable": true
+                    },
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WebhookEvent"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_InstallmentStatusChanged": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    },
+                    "installmentId": {
+                        "type": "string"
+                    },
+                    "paymentId": {
+                        "type": "string"
+                    },
+                    "generatorId": {
+                        "type": "string"
+                    },
+                    "generatorType": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_InvoiceAuthorized": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    },
+                    "invoiceId": {
+                        "type": "string"
+                    },
+                    "generatorId": {
+                        "type": "string"
+                    },
+                    "generatorType": {
+                        "type": "string"
+                    },
+                    "invoiceNumber": {
+                        "type": "integer"
+                    },
+                    "xmlLink": {
+                        "type": "string"
+                    },
+                    "pdfLink": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_MetaProductChanged": {
+                "properties": {
+                    "brand": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "groupId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "variants": {
+                        "type": "array"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_MetaProductCreated": {
+                "properties": {
+                    "brand": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "groupId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "variants": {
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_MetaProductRemoved": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_OrderRemoved": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_PriceChanged": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "metaProductId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_ProductChanged": {
+                "properties": {
+                    "barCode": {
+                        "type": "string"
+                    },
+                    "cest": {
+                        "type": "string"
+                    },
+                    "cnpjManufacturer": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "grossWeight": {
+                        "type": "string"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "imagesUrl": {
+                        "type": "array"
+                    },
+                    "metaProductId": {
+                        "type": "string"
+                    },
+                    "minimumStock": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "array"
+                    },
+                    "ncm": {
+                        "type": "string"
+                    },
+                    "netWeight": {
+                        "type": "string"
+                    },
+                    "observation": {
+                        "type": "string"
+                    },
+                    "packageSizeDepth": {
+                        "type": "string"
+                    },
+                    "packageSizeHeight": {
+                        "type": "string"
+                    },
+                    "packageSizeWidth": {
+                        "type": "string"
+                    },
+                    "purpose": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "variations": {
+                        "type": "array"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_ProductCreated": {
+                "properties": {
+                    "barCode": {
+                        "type": "string"
+                    },
+                    "cest": {
+                        "type": "string"
+                    },
+                    "cnpjManufacturer": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "packageSizeDepth": {
+                        "type": "string"
+                    },
+                    "grossWeight": {
+                        "type": "string"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "packageSizeHeight": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "imagesUrl": {
+                        "type": "array"
+                    },
+                    "metaProductId": {
+                        "type": "string"
+                    },
+                    "minimumStock": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ncm": {
+                        "type": "string"
+                    },
+                    "netWeight": {
+                        "type": "string"
+                    },
+                    "observation": {
+                        "type": "string"
+                    },
+                    "purpose": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "variations": {
+                        "type": "array"
+                    },
+                    "packageSizeWidth": {
+                        "type": "string"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_ProductRemoved": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "metaProductId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_ProductStockChanged": {
+                "properties": {
+                    "product": {
+                        "type": "string"
+                    },
+                    "stockLocation": {
+                        "type": "string"
+                    },
+                    "availableStock": {
+                        "type": "string"
+                    },
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookData_ShipmentStatusChanged": {
+                "properties": {
+                    "companyId": {
+                        "type": "string"
+                    },
+                    "branchId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "sale": {
+                        "type": "string"
+                    },
+                    "order": {
+                        "type": "string"
+                    },
+                    "previousStatus": {
+                        "type": "string"
+                    },
+                    "currentStatus": {
+                        "type": "string"
+                    },
+                    "deliveryMethod": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookEvent": {
+                "type": "string",
+                "enum": [
+                    "PRODUCT_STOCK_CHANGED",
+                    "PRODUCT_CREATED",
+                    "PRODUCT_CHANGED",
+                    "PRODUCT_REMOVED",
+                    "META_PRODUCT_CREATED",
+                    "META_PRODUCT_CHANGED",
+                    "META_PRODUCT_REMOVED",
+                    "PRICE_CHANGED",
+                    "SHIPMENT_STATUS_CHANGED",
+                    "ORDER_REMOVED",
+                    "INVOICE_AUTHORIZED",
+                    "INSTALLMENT_STATUS_CHANGED"
+                ]
+            },
+            "WebhookConfig": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WebhookEvent"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "WebhookPayload": {
+                "properties": {
+                    "event": {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/WebhookData_InstallmentStatusChanged"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_InvoiceAuthorized"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_MetaProductChanged"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_MetaProductCreated"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_MetaProductRemoved"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_OrderRemoved"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_PriceChanged"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_ProductChanged"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_ProductCreated"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_ProductRemoved"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_ProductStockChanged"
+                            },
+                            {
+                                "$ref": "#/components/schemas/WebhookData_ShipmentStatusChanged"
+                            }
+                        ]
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
             }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
         }
-      },
-      "patch": {
-        "operationId": "UpdateWebhook",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateWebhookCommand"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Validation error"
-          }
-        }
-      }
     }
-  },
-  "components": {
-    "schemas": {
-      "CreateWebhookCommand": {
-        "required": [
-          "url",
-          "events"
-        ],
-        "properties": {
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "maxLength": 500,
-            "nullable": true
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookEvent"
-            }
-          }
-        },
-        "type": "object"
-      },
-      "UpdateWebhookCommand": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "maxLength": 500,
-            "nullable": true
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookEvent"
-            }
-          }
-        },
-        "type": "object"
-      },
-      "WebhookData_ProductStockChanged": {
-        "properties": {
-          "product": {
-            "type": "string"
-          },
-          "stockLocation": {
-            "type": "string"
-          },
-          "availableStock": {
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "WebhookEvent": {
-        "type": "string",
-        "enum": [
-          "PRODUCT_STOCK_CHANGED",
-          "PRODUCT_CREATED",
-          "PRODUCT_CHANGED",
-          "PRODUCT_REMOVED",
-          "META_PRODUCT_CREATED",
-          "META_PRODUCT_CHANGED",
-          "META_PRODUCT_REMOVED",
-          "PRICE_CHANGED"
-        ]
-      },
-      "WebhookConfig": {
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string",
-            "format": "uri"
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookEvent"
-            }
-          }
-        },
-        "type": "object"
-      },
-      "WebhookPayload": {
-        "properties": {
-          "event": {
-            "$ref": "#/components/schemas/WebhookEvent"
-          },
-          "data": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/WebhookData_ProductStockChanged"
-              }
-            ]
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "type": "object"
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "https://api.useawise.com"
-    }
-  ]
 }
