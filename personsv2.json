@@ -1,0 +1,1123 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "personsV2",
+    "description": "",
+    "license": {
+      "name": ""
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/customers/": {
+      "post": {
+        "tags": [
+          "routes::handlers"
+        ],
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NewCustomer"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User does not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/bulk-remove": {
+      "post": {
+        "tags": [
+          "routes::handlers"
+        ],
+        "operationId": "bulk_remove",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/list": {
+      "post": {
+        "tags": [
+          "routes::handlers"
+        ],
+        "operationId": "list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginatedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerListResponse"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment is required to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "tags": [
+          "routes::handlers"
+        ],
+        "operationId": "find_by_id",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "The customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User does not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "routes::handlers"
+        ],
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "The customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User does not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressType": {
+        "type": "string",
+        "enum": [
+          "m",
+          "b",
+          "s",
+          "w"
+        ]
+      },
+      "Customer": {
+        "type": "object",
+        "required": [
+          "id",
+          "creditLimit",
+          "personType",
+          "client",
+          "supplier",
+          "salesperson",
+          "carrier",
+          "employee",
+          "monthlyIncome",
+          "createdDateTime",
+          "changedDateTime",
+          "companyId",
+          "inProtest"
+        ],
+        "properties": {
+          "accountableBuyer": {
+            "type": "string",
+            "nullable": true
+          },
+          "authorizedPerson": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "carrier": {
+            "type": "boolean"
+          },
+          "changedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "client": {
+            "type": "boolean"
+          },
+          "clientSince": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creditLimit": {
+            "type": "string"
+          },
+          "emailXml": {
+            "type": "string",
+            "nullable": true
+          },
+          "employee": {
+            "type": "boolean"
+          },
+          "fatherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "flags": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inProtest": {
+            "type": "boolean"
+          },
+          "inscricaoEstadual": {
+            "type": "string",
+            "nullable": true
+          },
+          "inscricaoMunicipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "linkedBranch": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxInstallments": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "monthlyIncome": {
+            "type": "string"
+          },
+          "motherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalIdNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "personType": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "photoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Priority"
+              }
+            ],
+            "nullable": true
+          },
+          "profession": {
+            "type": "string",
+            "nullable": true
+          },
+          "removedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rg": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesperson": {
+            "type": "boolean"
+          },
+          "salespersonPersonId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sex": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sex"
+              }
+            ],
+            "nullable": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Situation"
+              }
+            ],
+            "nullable": true
+          },
+          "supplier": {
+            "type": "boolean"
+          },
+          "workLocation": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CustomerError": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "Subscription"
+            ],
+            "properties": {
+              "Subscription": {
+                "$ref": "#/components/schemas/SubscriptionError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "Diesel"
+            ],
+            "properties": {
+              "Diesel": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "CustomerListResponse": {
+        "type": "object",
+        "required": [
+          "total",
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CustomerResponse": {
+        "type": "object",
+        "required": [
+          "success",
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DateFilter": {
+        "type": "object",
+        "properties": {
+          "end": {
+            "type": "string",
+            "example": "2024-08-31",
+            "nullable": true
+          },
+          "start": {
+            "type": "string",
+            "example": "2024-08-01",
+            "nullable": true
+          }
+        }
+      },
+      "Filters": {
+        "type": "object",
+        "properties": {
+          "birthDate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateFilter"
+              }
+            ],
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "example": "JD",
+            "nullable": true
+          },
+          "id": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": "['lbK4xr', '6J8lJM']",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "example": "John Doe Ltd.",
+            "nullable": true
+          },
+          "linkedBranch": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": "['lbK4xr', '6J8lJM']",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "nullable": true
+          },
+          "nationalIdNum": {
+            "type": "string",
+            "example": "12345678900",
+            "nullable": true
+          },
+          "personType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": "['nat', 'jur']",
+            "nullable": true
+          },
+          "pesquisa": {
+            "type": "string",
+            "example": "John Doe",
+            "nullable": true
+          },
+          "removed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "salespersonAssigned": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "salespersonPerson": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": "['lbK4xr', '6J8lJM']",
+            "nullable": true
+          },
+          "sex": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sex"
+              }
+            ],
+            "nullable": true
+          },
+          "withNoSalesInPeriod": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateFilter"
+              }
+            ],
+            "nullable": true
+          },
+          "withSalesInPeriod": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateFilter"
+              }
+            ],
+            "nullable": true
+          }
+        }
+      },
+      "NewCustomer": {
+        "type": "object",
+        "properties": {
+          "accountableBuyer": {
+            "type": "string",
+            "nullable": true
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewPersonAddress"
+            },
+            "nullable": true
+          },
+          "authorizedPerson": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientSince": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewPersonContact"
+            },
+            "nullable": true
+          },
+          "creditLimit": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailXml": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "fatherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "inProtest": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "inscricaoEstadual": {
+            "type": "string",
+            "nullable": true
+          },
+          "inscricaoMunicipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxInstallments": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "monthlyIncome": {
+            "type": "string",
+            "nullable": true
+          },
+          "motherName": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalIdNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "personType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PersonType"
+              }
+            ],
+            "nullable": true
+          },
+          "photoData": {
+            "type": "string",
+            "nullable": true
+          },
+          "photoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Priority"
+              }
+            ],
+            "nullable": true
+          },
+          "profession": {
+            "type": "string",
+            "nullable": true
+          },
+          "rg": {
+            "type": "string",
+            "nullable": true
+          },
+          "salespersonPersonId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sex": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sex"
+              }
+            ],
+            "nullable": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Situation"
+              }
+            ],
+            "nullable": true
+          },
+          "workLocation": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewPersonAddress": {
+        "type": "object",
+        "required": [
+          "addressType"
+        ],
+        "properties": {
+          "addressType": {
+            "$ref": "#/components/schemas/AddressType"
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "cityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "complement": {
+            "type": "string",
+            "nullable": true
+          },
+          "district": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewPersonContact": {
+        "type": "object",
+        "required": [
+          "value",
+          "contactType"
+        ],
+        "properties": {
+          "contactType": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "PaginatedRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pagination"
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ],
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "order_by": {
+                "type": "string",
+                "nullable": true
+              },
+              "order_direction": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "page_number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "page_size": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PersonAddress": {
+        "type": "object",
+        "required": [
+          "id",
+          "address_type"
+        ],
+        "properties": {
+          "address_type": {
+            "$ref": "#/components/schemas/AddressType"
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "city_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "complement": {
+            "type": "string",
+            "nullable": true
+          },
+          "district": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipio_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "person_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PersonContact": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "contact_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "person_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PersonType": {
+        "type": "string",
+        "enum": [
+          "nat",
+          "jur"
+        ]
+      },
+      "Priority": {
+        "type": "string",
+        "enum": [
+          "1",
+          "0",
+          "-1"
+        ],
+        "example": "0"
+      },
+      "RemoveBody": {
+        "type": "object",
+        "required": [
+          "ids"
+        ],
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": "['lbK4xr', '6J8lJM', 'Ob91b2']"
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "data": {
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Sex": {
+        "type": "string",
+        "enum": [
+          "M",
+          "F",
+          "O",
+          "Empty"
+        ]
+      },
+      "Situation": {
+        "type": "string",
+        "enum": [
+          "c",
+          "p",
+          "i"
+        ]
+      },
+      "SubscriptionError": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "Internal"
+            ],
+            "properties": {
+              "Internal": {
+                "type": "object"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "MissingModule"
+            ],
+            "properties": {
+              "MissingModule": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
