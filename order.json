@@ -1,1534 +1,1612 @@
 {
-    "openapi": "3.0.0",
-    "paths": {
-        "/coupons": {
-            "post": {
-                "operationId": "createCoupon",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateCouponCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
+  "openapi": "3.0.0",
+  "paths": {
+    "/coupons": {
+      "post": {
+        "operationId": "createCoupon",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCouponCommand"
+              }
             }
+          }
         },
-        "/orders": {
-            "get": {
-                "operationId": "SearchOrders",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ReadModelOrder"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
                     }
+                  },
+                  "type": "object"
                 }
-            },
-            "post": {
-                "operationId": "createOrder",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateOrderCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
+              }
             }
-        },
-        "/orders/bulk-remove": {
-            "post": {
-                "operationId": "bulkDeleteOrder",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/DeleteOrdersCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/{id}/bill": {
-            "post": {
-                "operationId": "confirmBilling",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ConfirmBillingCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/{id}/tax-invoice": {
-            "post": {
-                "operationId": "issueTaxInvoice",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/IssueTaxInvoiceCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/{id}": {
-            "get": {
-                "operationId": "FindOrder",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "delete": {
-                "operationId": "DeleteOrder",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Success"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "operationId": "editOrder",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/EditOrderCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/{id}/shipping": {
-            "patch": {
-                "operationId": "updateOrderShipping",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateOrderShipping"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/sales/{id}": {
-            "delete": {
-                "operationId": "DeleteSale",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Sale already removed"
-                    },
-                    "423": {
-                        "description": "This request is processing"
-                    }
-                }
-            }
-        },
-        "/sale-intents/{id}": {
-            "get": {
-                "operationId": "FindSaleIntent",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelSaleIntent"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            }
-        },
-        "/sale-intents/confirm": {
-            "post": {
-                "operationId": "confirmSaleIntents",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ConfirmSaleIntentsCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/ReadModelOrder"
-                                        },
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/sale-intents/reopen": {
-            "post": {
-                "operationId": "reopenSaleIntents",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ReopenSaleIntentsCommand"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/v2/sale-intents": {
-            "post": {
-                "operationId": "V2_CreateSaleIntent",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/V2_CreateSaleIntent"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "data": {
-                                            "properties": {
-                                                "saleIntent": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
-    },
-    "components": {
-        "schemas": {
-            "CreateCouponCommand": {
-                "properties": {
-                    "code": {
-                        "description": "A unique code identifying this coupon.",
-                        "type": "string"
-                    },
-                    "customerId": {
-                        "description": "Optional. Used to restrict the usage of this coupon to a specific customer.\nWhen informed, must be a valid person id. See Person API.",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "expiresAt": {
-                        "description": "Optional. If informed, the coupon can only be used before the specified date.\nUse ISO-8601 format and UTC timezone.",
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "valueType": {
-                        "description": "Specifies how the value should be used. Currently, the only option is\n\"fixed_value\" and the value must be specified as a fixed value in the\ncompany's currency.",
-                        "type": "string",
-                        "enum": [
-                            "fixed_value"
-                        ]
-                    },
-                    "value": {
-                        "description": "Discount value. See docs on the valueType attribute for details.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Order_ConfirmBilling_Billing": {
-                "properties": {
-                    "usedCreditValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Order_ConfirmBilling_BillingPayment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "Order_ConfirmBilling_BillingInstallment": {
-                "properties": {
-                    "value": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "compensationDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
-                    },
-                    "compensationDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "Order_ConfirmBilling_BillingPayment": {
-                "properties": {
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string",
-                        "enum": [
-                            "on_order",
-                            "in_installments"
-                        ]
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Order_ConfirmBilling_BillingInstallment"
-                        }
-                    },
-                    "tef": {
-                        "$ref": "#/components/schemas/Order_ConfirmBilling_BillingPayment_Tef"
-                    }
-                },
-                "type": "object"
-            },
-            "ConfirmBillingCommand": {
-                "properties": {
-                    "cashRegisterId": {
-                        "type": "string"
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/Order_ConfirmBilling_Billing"
-                    }
-                },
-                "type": "object"
-            },
-            "Order_ConfirmBilling_BillingPayment_Tef": {
-                "properties": {
-                    "networkCnpj": {
-                        "type": "string"
-                    },
-                    "administratorName": {
-                        "type": "string"
-                    },
-                    "nsu": {
-                        "type": "string"
-                    },
-                    "pspId": {
-                        "type": "string"
-                    },
-                    "chargeId": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrderBilling": {
-                "properties": {
-                    "usedCreditValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CreateOrderBillingPayment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrderBillingInstallment": {
-                "properties": {
-                    "value": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "compensationDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true,
-                        "deprecated": true
-                    },
-                    "compensationDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrderBillingPayment": {
-                "properties": {
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string",
-                        "enum": [
-                            "on_order",
-                            "in_installments"
-                        ]
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CreateOrderBillingInstallment"
-                        }
-                    },
-                    "tef": {
-                        "$ref": "#/components/schemas/CreateOrder_BillingPayment_Tef"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrderCommand": {
-                "properties": {
-                    "customerId": {
-                        "description": "ID of order customer. See Person API.",
-                        "type": "string"
-                    },
-                    "nationalIdNum": {
-                        "description": "Alternative to customerId. Uses a unique national identifier (i.e. CPF in\nBrazil) to inform the customer. If no customer with this identifier is\nfound, then a customer is created, otherwise the order uses the\ncustomer already created in Awise. This property will be ignored if a\ncustomerId is present.",
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ApplicationOrderItem"
-                        }
-                    },
-                    "shipmentCosts": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "insuranceValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "otherExpensesValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "discountValue": {
-                        "description": "Total order discount. Sum of all individual item discount added to general order discount, if any. All\nindividual items discounts are replaced by discountValue proportionaly divided by items value.",
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true,
-                        "deprecated": true
-                    },
-                    "discount": {
-                        "description": "Order discount value. This value is proportionaly divided by items value and then added to individual items\ndiscount value.",
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/CreateOrderBilling"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "created",
-                            "delivered",
-                            "billed",
-                            "fulfilled"
-                        ],
-                        "nullable": true
-                    },
-                    "cashRegisterId": {
-                        "type": "string"
-                    },
-                    "originExchangeId": {
-                        "type": "string"
-                    },
-                    "source": {
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "nullable": false
-                            },
-                            "data": {
-                                "type": "object",
-                                "nullable": true,
-                                "additionalProperties": {
-                                    "nullable": true,
-                                    "anyOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "type": "number"
-                                        },
-                                        {
-                                            "type": "boolean"
-                                        }
-                                    ]
-                                }
-                            }
-                        },
-                        "type": "object",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ApplicationOrderItem": {
-                "properties": {
-                    "productId": {
-                        "description": "Awise Product ID. See Product API.",
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "deliveryStatus": {
-                        "type": "string",
-                        "enum": [
-                            "reserved",
-                            "delivered",
-                            "partial"
-                        ]
-                    },
-                    "unitPrice": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "discount": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "productCode": {
-                        "description": "Alternative to productId. Uses the poduct code (i.e. SKU) to identify\nthe product in the order. The product must be previously created in\nAwise to be found. This property will be ignored if productId is\npresent.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateOrder_BillingPayment_Tef": {
-                "properties": {
-                    "networkCnpj": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "administratorName": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "nsu": {
-                        "type": "string"
-                    },
-                    "pspId": {
-                        "type": "string"
-                    },
-                    "chargeId": {
-                        "type": "string"
-                    },
-                    "pixId": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "DeleteOrdersCommand": {
-                "properties": {
-                    "orderIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "IssueTaxInvoiceCommand": {
-                "properties": {
-                    "model": {
-                        "type": "string",
-                        "enum": [
-                            "NFe",
-                            "NFCe"
-                        ],
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateOrderShipping": {
-                "properties": {
-                    "status": {
-                        "description": "- cr = created\n- ca = canceled\n- pa = packing\n- rs = ready to ship\n- it = in transit\n- de = delivered",
-                        "type": "string",
-                        "enum": [
-                            "cr",
-                            "ca",
-                            "pa",
-                            "rs",
-                            "it",
-                            "de"
-                        ],
-                        "nullable": false
-                    },
-                    "trackingCode": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "trackingUrl": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "AccomplishSaleIntentCommand": {},
-            "ConfirmSaleIntentsBilling": {
-                "properties": {
-                    "usedCreditValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ConfirmSaleIntentsBillingPayment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "ConfirmSaleIntentsBillingInstallment": {
-                "properties": {
-                    "value": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "compensationDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true,
-                        "deprecated": true
-                    },
-                    "compensationDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ConfirmSaleIntentsBillingPayment": {
-                "properties": {
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string",
-                        "enum": [
-                            "on_order",
-                            "in_installments"
-                        ]
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ConfirmSaleIntentsBillingInstallment"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "ConfirmSaleIntentsCommand": {
-                "properties": {
-                    "saleIntentsIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "shipmentCosts": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "insuranceValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "otherExpensesValue": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "discount": {
-                        "description": "Order discount.",
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/ConfirmSaleIntentsBilling"
-                    },
-                    "status": {
-                        "type": "string",
-                        "format": "string",
-                        "nullable": true
-                    },
-                    "cashRegisterId": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ReopenSaleIntentsCommand": {
-                "properties": {
-                    "saleIntentsIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateSaleIntent": {
-                "properties": {
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "client": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/V2_CreateSaleIntent_SaleIntentItem"
-                        }
-                    },
-                    "observation": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "salesperson": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "status": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "V2_CreateSaleIntent_SaleIntentItem": {
-                "properties": {
-                    "discountValue": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "product": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "productName": {
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "string"
-                    },
-                    "unit": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "unitValue": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBilling": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingPayment"
-                        }
-                    },
-                    "usedCreditAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBillingInstallment": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "dueDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
-                    },
-                    "amount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelBillingPayment": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "paymentConfigurationId": {
-                        "type": "string"
-                    },
-                    "paymentCondition": {
-                        "type": "string"
-                    },
-                    "installments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingInstallment"
-                        }
-                    },
-                    "tef": {
-                        "$ref": "#/components/schemas/ReadModel_BillingPayment_Tef"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrder": {
-                "properties": {
-                    "isEditable": {
-                        "type": "boolean"
-                    },
-                    "source": {
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "nullable": false
-                            },
-                            "data": {
-                                "type": "object",
-                                "nullable": true,
-                                "additionalProperties": {
-                                    "nullable": true,
-                                    "anyOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "type": "number"
-                                        },
-                                        {
-                                            "type": "boolean"
-                                        }
-                                    ]
-                                }
-                            }
-                        },
-                        "type": "object",
-                        "nullable": true
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "branch": {
-                        "type": "string"
-                    },
-                    "company": {
-                        "type": "string"
-                    },
-                    "orderNumber": {
-                        "description": "Com php7 era retornado como string mesmo estando tipado como int, com php8 retorna int corretamente,\nmas quebra o financial-entries, que espera string, por isso foi adicionado @JSON\\Type(\"string\")",
-                        "type": "integer"
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "salespersonId": {
-                        "type": "string"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelOrderItem"
-                        }
-                    },
-                    "total": {
-                        "$ref": "#/components/schemas/ReadModelOrderAmount"
-                    },
-                    "billing": {
-                        "$ref": "#/components/schemas/ReadModelBilling"
-                    },
-                    "companyUserId": {
-                        "type": "string"
-                    },
-                    "removedDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "coupons": {
-                        "description": "List with the code of discount coupons used in this order, if any. See Coupons api.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrderAmount": {
-                "properties": {
-                    "itemsTotal": {
-                        "type": "string"
-                    },
-                    "shipment": {
-                        "type": "string"
-                    },
-                    "insurance": {
-                        "type": "string"
-                    },
-                    "otherExpenses": {
-                        "type": "string"
-                    },
-                    "discount": {
-                        "type": "string"
-                    },
-                    "orderTotal": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrderBilling": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "payments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelBillingPayment"
-                        }
-                    },
-                    "usedCreditAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelOrderItem": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "order": {
-                        "type": "string"
-                    },
-                    "product": {
-                        "$ref": "#/components/schemas/ReadModelProductReference"
-                    },
-                    "quantity": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "deliveredQuantity": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "unitPrice": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "totalAmount": {
-                        "type": "string",
-                        "format": "decimal"
-                    },
-                    "deliveryStatus": {
-                        "type": "string"
-                    },
-                    "observation": {
-                        "type": "string"
-                    },
-                    "discount": {
-                        "type": "string",
-                        "format": "decimal"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelProductReference": {
-                "properties": {
-                    "productId": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "code": {
-                        "type": "string"
-                    },
-                    "barcode": {
-                        "type": "string"
-                    },
-                    "unit": {
-                        "type": "string"
-                    },
-                    "cost": {
-                        "type": "string",
-                        "format": "decimal",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModel_BillingPayment_Tef": {
-                "properties": {
-                    "networkCnpj": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "administratorName": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "nsu": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "pspId": {
-                        "type": "string"
-                    },
-                    "chargeId": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelSaleIntent": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "saleIntentNumber": {
-                        "type": "integer"
-                    },
-                    "accrualDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "createdDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "changedDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "removedDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "observation": {
-                        "type": "string"
-                    },
-                    "client": {
-                        "type": "string"
-                    },
-                    "salesperson": {
-                        "type": "string"
-                    },
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ReadModelSaleIntentItem"
-                        }
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "company": {
-                        "type": "string"
-                    },
-                    "branch": {
-                        "type": "string"
-                    },
-                    "companyUser": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ReadModelSaleIntentItem": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "saleIntent": {
-                        "type": "string"
-                    },
-                    "product": {
-                        "type": "string"
-                    },
-                    "productName": {
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "string"
-                    },
-                    "unit": {
-                        "type": "string"
-                    },
-                    "unitValue": {
-                        "type": "string"
-                    },
-                    "discountValue": {
-                        "type": "string"
-                    },
-                    "createdDateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "changedDateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "removedDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
         }
+      ]
     },
-    "info": {
-        "title": "Order",
-        "description": "Replaces de Sales API. Used to register customer orders/sales."
+    "/orders": {
+      "get": {
+        "operationId": "SearchOrders",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReadModelOrder"
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/orders/bulk-remove": {
+      "post": {
+        "operationId": "bulkDeleteOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteOrdersCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/orders/{id}/bill": {
+      "post": {
+        "operationId": "confirmBilling",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBillingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/orders/{id}/tax-invoice": {
+      "post": {
+        "operationId": "issueTaxInvoice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueTaxInvoiceCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/orders/{id}": {
+      "get": {
+        "operationId": "FindOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "editOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditOrderCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/orders/{id}/shipping": {
+      "patch": {
+        "operationId": "updateOrderShipping",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrderShipping"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/sales/{id}": {
+      "delete": {
+        "operationId": "DeleteSale",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sale already removed"
+          },
+          "423": {
+            "description": "This request is processing"
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/sale-intents/{id}": {
+      "get": {
+        "operationId": "FindSaleIntent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelSaleIntent"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/sale-intents/confirm": {
+      "post": {
+        "operationId": "confirmSaleIntents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmSaleIntentsCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadModelOrder"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/sale-intents/reopen": {
+      "post": {
+        "operationId": "reopenSaleIntents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReopenSaleIntentsCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
+    },
+    "/v2/sale-intents": {
+      "post": {
+        "operationId": "V2_CreateSaleIntent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/V2_CreateSaleIntent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "properties": {
+                        "saleIntent": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     }
+  },
+  "components": {
+    "schemas": {
+      "CreateCouponCommand": {
+        "properties": {
+          "code": {
+            "description": "A unique code identifying this coupon.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "Optional. Used to restrict the usage of this coupon to a specific customer.\nWhen informed, must be a valid person id. See Person API.",
+            "type": "string",
+            "nullable": true
+          },
+          "expiresAt": {
+            "description": "Optional. If informed, the coupon can only be used before the specified date.\nUse ISO-8601 format and UTC timezone.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "valueType": {
+            "description": "Specifies how the value should be used. Currently, the only option is\n\"fixed_value\" and the value must be specified as a fixed value in the\ncompany's currency.",
+            "type": "string",
+            "enum": [
+              "fixed_value"
+            ]
+          },
+          "value": {
+            "description": "Discount value. See docs on the valueType attribute for details.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Order_ConfirmBilling_Billing": {
+        "properties": {
+          "usedCreditValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order_ConfirmBilling_BillingPayment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "Order_ConfirmBilling_BillingInstallment": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "compensationDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "compensationDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "Order_ConfirmBilling_BillingPayment": {
+        "properties": {
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string",
+            "enum": [
+              "on_order",
+              "in_installments"
+            ]
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order_ConfirmBilling_BillingInstallment"
+            }
+          },
+          "tef": {
+            "$ref": "#/components/schemas/Order_ConfirmBilling_BillingPayment_Tef"
+          }
+        },
+        "type": "object"
+      },
+      "ConfirmBillingCommand": {
+        "properties": {
+          "cashRegisterId": {
+            "type": "string"
+          },
+          "billing": {
+            "$ref": "#/components/schemas/Order_ConfirmBilling_Billing"
+          }
+        },
+        "type": "object"
+      },
+      "Order_ConfirmBilling_BillingPayment_Tef": {
+        "properties": {
+          "networkCnpj": {
+            "type": "string"
+          },
+          "administratorName": {
+            "type": "string"
+          },
+          "nsu": {
+            "type": "string"
+          },
+          "pspId": {
+            "type": "string"
+          },
+          "chargeId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrderBilling": {
+        "properties": {
+          "usedCreditValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateOrderBillingPayment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrderBillingInstallment": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "compensationDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "deprecated": true
+          },
+          "compensationDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrderBillingPayment": {
+        "properties": {
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string",
+            "enum": [
+              "on_order",
+              "in_installments"
+            ]
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateOrderBillingInstallment"
+            }
+          },
+          "tef": {
+            "$ref": "#/components/schemas/CreateOrder_BillingPayment_Tef"
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrderCommand": {
+        "properties": {
+          "customerId": {
+            "description": "ID of order customer. See Person API.",
+            "type": "string"
+          },
+          "nationalIdNum": {
+            "description": "Alternative to customerId. Uses a unique national identifier (i.e. CPF in\nBrazil) to inform the customer. If no customer with this identifier is\nfound, then a customer is created, otherwise the order uses the\ncustomer already created in Awise. This property will be ignored if a\ncustomerId is present.",
+            "type": "string"
+          },
+          "salespersonId": {
+            "type": "string"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationOrderItem"
+            }
+          },
+          "shipmentCosts": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "insuranceValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "otherExpensesValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "discountValue": {
+            "description": "Total order discount. Sum of all individual item discount added to general order discount, if any. All\nindividual items discounts are replaced by discountValue proportionaly divided by items value.",
+            "type": "string",
+            "format": "decimal",
+            "nullable": true,
+            "deprecated": true
+          },
+          "discount": {
+            "description": "Order discount value. This value is proportionaly divided by items value and then added to individual items\ndiscount value.",
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "billing": {
+            "$ref": "#/components/schemas/CreateOrderBilling"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "created",
+              "delivered",
+              "billed",
+              "fulfilled"
+            ],
+            "nullable": true
+          },
+          "cashRegisterId": {
+            "type": "string"
+          },
+          "originExchangeId": {
+            "type": "string"
+          },
+          "source": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "nullable": false
+              },
+              "data": {
+                "type": "object",
+                "nullable": true,
+                "additionalProperties": {
+                  "nullable": true,
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              }
+            },
+            "type": "object",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ApplicationOrderItem": {
+        "properties": {
+          "productId": {
+            "description": "Awise Product ID. See Product API.",
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "deliveryStatus": {
+            "type": "string",
+            "enum": [
+              "reserved",
+              "delivered",
+              "partial"
+            ]
+          },
+          "unitPrice": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "discount": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "productCode": {
+            "description": "Alternative to productId. Uses the poduct code (i.e. SKU) to identify\nthe product in the order. The product must be previously created in\nAwise to be found. This property will be ignored if productId is\npresent.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CreateOrder_BillingPayment_Tef": {
+        "properties": {
+          "networkCnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "administratorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nsu": {
+            "type": "string"
+          },
+          "pspId": {
+            "type": "string"
+          },
+          "chargeId": {
+            "type": "string"
+          },
+          "pixId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "DeleteOrdersCommand": {
+        "properties": {
+          "orderIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "IssueTaxInvoiceCommand": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "enum": [
+              "NFe",
+              "NFCe"
+            ],
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "UpdateOrderShipping": {
+        "properties": {
+          "status": {
+            "description": "- cr = created\n- ca = canceled\n- pa = packing\n- rs = ready to ship\n- it = in transit\n- de = delivered",
+            "type": "string",
+            "enum": [
+              "cr",
+              "ca",
+              "pa",
+              "rs",
+              "it",
+              "de"
+            ],
+            "nullable": false
+          },
+          "trackingCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "trackingUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "AccomplishSaleIntentCommand": {},
+      "ConfirmSaleIntentsBilling": {
+        "properties": {
+          "usedCreditValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmSaleIntentsBillingPayment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "ConfirmSaleIntentsBillingInstallment": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "compensationDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "deprecated": true
+          },
+          "compensationDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ConfirmSaleIntentsBillingPayment": {
+        "properties": {
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string",
+            "enum": [
+              "on_order",
+              "in_installments"
+            ]
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmSaleIntentsBillingInstallment"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "ConfirmSaleIntentsCommand": {
+        "properties": {
+          "saleIntentsIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "salespersonId": {
+            "type": "string"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipmentCosts": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "insuranceValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "otherExpensesValue": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "discount": {
+            "description": "Order discount.",
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          },
+          "billing": {
+            "$ref": "#/components/schemas/ConfirmSaleIntentsBilling"
+          },
+          "status": {
+            "type": "string",
+            "format": "string",
+            "nullable": true
+          },
+          "cashRegisterId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReopenSaleIntentsCommand": {
+        "properties": {
+          "saleIntentsIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateSaleIntent": {
+        "properties": {
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "client": {
+            "type": "string",
+            "nullable": false
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/V2_CreateSaleIntent_SaleIntentItem"
+            }
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesperson": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "V2_CreateSaleIntent_SaleIntentItem": {
+        "properties": {
+          "discountValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "product": {
+            "type": "string",
+            "nullable": false
+          },
+          "productName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBilling": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingPayment"
+            }
+          },
+          "usedCreditAmount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBillingInstallment": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelBillingPayment": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "paymentConfigurationId": {
+            "type": "string"
+          },
+          "paymentCondition": {
+            "type": "string"
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingInstallment"
+            }
+          },
+          "tef": {
+            "$ref": "#/components/schemas/ReadModel_BillingPayment_Tef"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrder": {
+        "properties": {
+          "isEditable": {
+            "type": "boolean"
+          },
+          "source": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "nullable": false
+              },
+              "data": {
+                "type": "object",
+                "nullable": true,
+                "additionalProperties": {
+                  "nullable": true,
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              }
+            },
+            "type": "object",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "orderNumber": {
+            "description": "Com php7 era retornado como string mesmo estando tipado como int, com php8 retorna int corretamente,\nmas quebra o financial-entries, que espera string, por isso foi adicionado @JSON\\Type(\"string\")",
+            "type": "integer"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "salespersonId": {
+            "type": "string"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelOrderItem"
+            }
+          },
+          "total": {
+            "$ref": "#/components/schemas/ReadModelOrderAmount"
+          },
+          "billing": {
+            "$ref": "#/components/schemas/ReadModelBilling"
+          },
+          "companyUserId": {
+            "type": "string"
+          },
+          "removedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "coupons": {
+            "description": "List with the code of discount coupons used in this order, if any. See Coupons api.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrderAmount": {
+        "properties": {
+          "itemsTotal": {
+            "type": "string"
+          },
+          "shipment": {
+            "type": "string"
+          },
+          "insurance": {
+            "type": "string"
+          },
+          "otherExpenses": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "string"
+          },
+          "orderTotal": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrderBilling": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelBillingPayment"
+            }
+          },
+          "usedCreditAmount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelOrderItem": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ReadModelProductReference"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "deliveredQuantity": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "unitPrice": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "totalAmount": {
+            "type": "string",
+            "format": "decimal"
+          },
+          "deliveryStatus": {
+            "type": "string"
+          },
+          "observation": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "string",
+            "format": "decimal"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelProductReference": {
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "string",
+            "format": "decimal",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ReadModel_BillingPayment_Tef": {
+        "properties": {
+          "networkCnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "administratorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nsu": {
+            "type": "string",
+            "nullable": true
+          },
+          "pspId": {
+            "type": "string"
+          },
+          "chargeId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelSaleIntent": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "saleIntentNumber": {
+            "type": "integer"
+          },
+          "accrualDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "changedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "removedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string"
+          },
+          "salesperson": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadModelSaleIntentItem"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "companyUser": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReadModelSaleIntentItem": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "saleIntent": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "unitValue": {
+            "type": "string"
+          },
+          "discountValue": {
+            "type": "string"
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "removedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Order",
+    "description": "Replaces de Sales API. Used to register customer orders/sales."
+  },
+  "servers": [
+    {
+      "url": "https://api.useawise.com",
+      "description": ""
+    }
+  ]
 }

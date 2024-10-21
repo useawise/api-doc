@@ -82,7 +82,13 @@
             }
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     },
     "/webhooks/{id}": {
       "get": {
@@ -165,7 +171,13 @@
             "description": "Validation error"
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     }
   },
   "components": {
@@ -664,5 +676,11 @@
         "type": "object"
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.useawise.com",
+      "description": ""
+    }
+  ]
 }

@@ -70,7 +70,13 @@
             }
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     },
     "/customers/bulk-remove": {
       "post": {
@@ -115,7 +121,13 @@
             }
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     },
     "/customers/list": {
       "post": {
@@ -170,7 +182,13 @@
             }
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     },
     "/customers/{customer_id}": {
       "get": {
@@ -315,7 +333,13 @@
             }
           }
         }
-      }
+      },
+      "servers": [
+        {
+          "url": "https://api.useawise.com",
+          "description": ""
+        }
+      ]
     }
   },
   "components": {
@@ -1119,5 +1143,11 @@
         ]
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.useawise.com",
+      "description": ""
+    }
+  ]
 }
