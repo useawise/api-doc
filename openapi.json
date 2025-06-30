@@ -57,6 +57,36 @@
       "description": "Pagination namespace",
       "required": false,
       "type": "string"
+    },
+    "filter[id]": {
+      "name": "filter[id]",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "filter[name]": {
+      "name": "filter[name]",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "filter[uf]": {
+      "name": "filter[uf]",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "filter[ufName]": {
+      "name": "filter[ufName]",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "filter[search]": {
+      "name": "filter[search]",
+      "in": "query",
+      "required": false,
+      "type": "string"
     }
   },
   "paths": {
@@ -25374,7 +25404,7 @@
         "tags": [
           "municipios"
         ],
-        "description": "Search for municipios",
+        "description": "Search for municipios.\n\nValid filters are:\n\nid\nuf\nufName\nsearch\nname",
         "parameters": [
           {
             "$ref": "#/parameters/sort"
@@ -25383,13 +25413,40 @@
             "$ref": "#/parameters/include"
           },
           {
-            "$ref": "#/parameters/filter"
-          },
-          {
             "$ref": "#/parameters/fields"
           },
           {
             "$ref": "#/parameters/page"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "filter[id]",
+            "description": "ID do município"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "filter[name]",
+            "description": "Nome do municío"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "filter[ufName]",
+            "description": "Nome por extenso da UF"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "filter[uf]",
+            "description": "Nome abreviado da UF, exemplo RS"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "filter[search]",
+            "description": "Permite buscar por nome incompleto"
           }
         ],
         "responses": {
@@ -25459,6 +25516,21 @@
             "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/error"
+            },
+            "examples": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "application/javascript": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
             }
           }
         }
