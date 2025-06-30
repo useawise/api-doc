@@ -647,13 +647,6 @@
           "workLocation": {
             "type": "string",
             "nullable": true
-          },
-          "municipioId": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "ulkb5cc8mq2x8"
-            },
-            "description": "Check municipio api to find the correct municipioId."
           }
         }
       },
@@ -1012,6 +1005,7 @@
           },
           "municipioId": {
             "type": "string",
+            "description": "Check /municipios api to see how to find the correct municipioId",
             "nullable": true
           },
           "number": {
