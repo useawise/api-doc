@@ -23,10 +23,68 @@
                 "items": {
                   "$ref": "#/components/schemas/NewCustomer"
                 }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": [
+                    {
+                      "personType": "nat",
+                      "addresses": [
+                        {
+                          "cep": "72871655",
+                          "municipioId": "5221858",
+                          "cityName": "Valparaíso de Goiás",
+                          "state": "GO",
+                          "street": "Quadra 12",
+                          "addressType": "m",
+                          "complement": "Bloco B",
+                          "district": "Setor de Chácaras Anhangüera C",
+                          "number": "730"
+                        }
+                      ],
+                      "clientSince": "2025-06-30",
+                      "contacts": [
+                        {
+                          "name": "",
+                          "contactType": "whatsapp",
+                          "value": "(61) 98496-6080"
+                        },
+                        {
+                          "name": "",
+                          "contactType": "email",
+                          "value": "mariah_moura@araraquara.com.br"
+                        },
+                        {
+                          "name": "",
+                          "contactType": "phone",
+                          "value": "(61) 29441-339"
+                        }
+                      ],
+                      "name": "Mariah Débora Moura",
+                      "nationalIdNum": "59100369632",
+                      "sex": "F",
+                      "birthDate": "1984-02-11",
+                      "creditLimit": "2000.00",
+                      "status": "c",
+                      "priority": 0,
+                      "emailXml": [
+                        "mariah_moura@araraquara.com.br"
+                      ],
+                      "profession": "Dentista",
+                      "monthlyIncome": "15000.00",
+                      "motherName": "Maitê Maitê",
+                      "fatherName": "Diego Diogo Moura",
+                      "code": "idoriginaldooutrosistema",
+                      "observation": "Cliente de demonstração de cadastro",
+                      "salespersonPersonId": "w5n91d"
+                    }
+                  ]
+                }
               }
             }
           },
-          "required": true
+          "required": true,
+          "description": ""
         },
         "responses": {
           "200": {
@@ -355,20 +413,73 @@
       },
       "Customer": {
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "personType": "nat",
+            "addresses": [
+              {
+                "cep": "72871655",
+                "municipioId": "5221858",
+                "cityName": "Valparaíso de Goiás",
+                "state": "GO",
+                "street": "Quadra 12",
+                "addressType": "m",
+                "complement": "Bloco B",
+                "district": "Setor de Chácaras Anhangüera C",
+                "number": "730"
+              }
+            ],
+            "clientSince": "2025-06-30",
+            "contacts": [
+              {
+                "name": "",
+                "contactType": "whatsapp",
+                "value": "(61) 98496-6080"
+              },
+              {
+                "name": "",
+                "contactType": "email",
+                "value": "mariah_moura@araraquara.com.br"
+              },
+              {
+                "name": "",
+                "contactType": "phone",
+                "value": "(61) 29441-339"
+              }
+            ],
+            "name": "Mariah Débora Moura",
+            "nationalIdNum": "59100369632",
+            "sex": "F",
+            "birthDate": "1984-02-11",
+            "creditLimit": "2000.00",
+            "status": "c",
+            "priority": 0,
+            "emailXml": [
+              "mariah_moura@araraquara.com.br"
+            ],
+            "profession": "Dentista",
+            "monthlyIncome": "15000.00",
+            "motherName": "Maitê Maitê",
+            "fatherName": "Diego Diogo Moura",
+            "code": "idoriginaldooutrosistema",
+            "observation": "Cliente de demonstração de cadastro",
+            "salespersonPersonId": "w5n91d"
+          }
+        },
         "required": [
-          "id",
-          "creditLimit",
-          "personType",
-          "client",
-          "supplier",
-          "salesperson",
           "carrier",
-          "employee",
-          "monthlyIncome",
-          "createdDateTime",
           "changedDateTime",
+          "client",
           "companyId",
-          "inProtest"
+          "createdDateTime",
+          "creditLimit",
+          "employee",
+          "id",
+          "inProtest",
+          "monthlyIncome",
+          "personType",
+          "salesperson",
+          "supplier"
         ],
         "properties": {
           "accountableBuyer": {
@@ -536,6 +647,13 @@
           "workLocation": {
             "type": "string",
             "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ulkb5cc8mq2x8"
+            },
+            "description": "Check municipio api to find the correct municipioId."
           }
         }
       },
