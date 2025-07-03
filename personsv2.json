@@ -1025,12 +1025,18 @@
       "NewPersonContact": {
         "type": "object",
         "required": [
-          "value",
-          "contactType"
+          "contactType",
+          "value"
         ],
         "properties": {
           "contactType": {
-            "type": "string"
+            "enum": [
+              "whatsapp",
+              "phone",
+              "email",
+              "instagram",
+              "facebook"
+            ]
           },
           "name": {
             "type": "string",
@@ -1172,9 +1178,9 @@
       "Priority": {
         "type": "string",
         "enum": [
-          "1",
-          "0",
-          "-1"
+          1,
+          0,
+          -1
         ],
         "example": "0"
       },
