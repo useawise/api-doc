@@ -5300,7 +5300,7 @@
         "tags": [
           "contact-types"
         ],
-        "description": "Search for contact-types",
+        "description": "Search for contact-types. Must be used only for persons v1 API.",
         "parameters": [
           {
             "$ref": "#/parameters/sort"
@@ -5387,7 +5387,8 @@
               "$ref": "#/definitions/error"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/contact-types/{id}": {
@@ -5395,7 +5396,7 @@
         "tags": [
           "contact-types"
         ],
-        "description": "Get a specific instance of contact-types",
+        "description": "Get a specific instance of contact-types. Must be used only for persons v1 API.",
         "parameters": [
           {
             "$ref": "#/parameters/sort"
@@ -5486,7 +5487,8 @@
               "$ref": "#/definitions/error"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/debt-renegotiations": {
