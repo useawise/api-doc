@@ -9,6 +9,51 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/bulk-remove": {
+      "post": {
+        "tags": [
+          "persons::routes::handlers"
+        ],
+        "operationId": "bulk_remove",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/customers/": {
       "post": {
         "tags": [
@@ -159,6 +204,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User does not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
                 }
               }
             }
@@ -397,6 +457,71 @@
           "url": "https://api.useawise.com",
           "description": ""
         }
+      ]
+    }
+  },
+  "/suppliers": {
+      "post": {
+        "tags": [
+          "persons::routes::handlers"
+        ],
+        "operationId": "post_suppliers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NewSupplier"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User does not have permission to access this resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "data": null,
+                  "error": "Error",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
       ]
     }
   },
@@ -1044,6 +1169,80 @@
           },
           "value": {
             "type": "string"
+          }
+        }
+      },
+      "NewSupplier": {
+        "type": "object",
+        "required": [
+          "personType"
+        ],
+        "properties": {
+          "personType": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "nationalIdNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "rg": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sex": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sex"
+              }
+            ],
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailXml": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "inscricaoEstadual": {
+            "type": "string",
+            "nullable": true
+          },
+          "inscricaoMunicipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "observation": {
+            "type": "string",
+            "nullable": true
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewPersonAddress"
+            },
+            "nullable": true
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewPersonContact"
+            },
+            "nullable": true
           }
         }
       },
