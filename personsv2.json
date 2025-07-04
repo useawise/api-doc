@@ -13,7 +13,7 @@
     "/bulk-remove": {
       "post": {
         "tags": [
-          "persons::routes::handlers"
+          "general"
         ],
         "operationId": "bulk_remove",
         "requestBody": {
@@ -58,7 +58,7 @@
     "/customers/": {
       "post": {
         "tags": [
-          "routes::handlers"
+          "customers"
         ],
         "operationId": "create",
         "requestBody": {
@@ -185,7 +185,7 @@
     "/customers/bulk-remove": {
       "post": {
         "tags": [
-          "routes::handlers"
+          "customers"
         ],
         "operationId": "bulk_remove",
         "requestBody": {
@@ -251,7 +251,7 @@
     "/customers/list": {
       "post": {
         "tags": [
-          "routes::handlers"
+          "customers"
         ],
         "operationId": "list",
         "requestBody": {
@@ -312,7 +312,7 @@
     "/customers/{customer_id}": {
       "get": {
         "tags": [
-          "routes::handlers"
+          "customers"
         ],
         "operationId": "find_by_id",
         "parameters": [
@@ -386,7 +386,7 @@
       },
       "patch": {
         "tags": [
-          "routes::handlers"
+          "customers"
         ],
         "operationId": "update",
         "parameters": [
@@ -463,7 +463,7 @@
     "/suppliers": {
       "post": {
         "tags": [
-          "persons::routes::handlers"
+          "suppliers"
         ],
         "operationId": "post_suppliers",
         "requestBody": {
