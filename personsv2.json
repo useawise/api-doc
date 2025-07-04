@@ -9,6 +9,7 @@
     "version": "0.1.0"
   },
   "paths": {
+    
     "/bulk-remove": {
       "post": {
         "tags": [
@@ -458,9 +459,8 @@
           "description": ""
         }
       ]
-    }
-  },
-  "/suppliers": {
+    },
+    "/suppliers": {
       "post": {
         "tags": [
           "persons::routes::handlers"
@@ -521,8 +521,7 @@
             }
           }
         }
-      }
-      ]
+      }  
     }
   },
   "components": {
