@@ -9,8 +9,7 @@
     "version": "0.1.0"
   },
   "paths": {
-    
-    "/bulk-remove": {
+    "/persons/bulk-remove": {
       "post": {
         "tags": [
           "general"
@@ -52,6 +51,9 @@
               }
             }
           }
+        },
+        "x-stoplight": {
+          "id": "qroft0epxexqt"
         }
       }
     },
@@ -521,7 +523,7 @@
             }
           }
         }
-      }  
+      }
     }
   },
   "components": {
