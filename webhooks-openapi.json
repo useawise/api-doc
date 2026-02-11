@@ -677,6 +677,9 @@
                     "data": {
                         "oneOf": [
                             {
+                                "$ref": "#/components/schemas/WebhookData_CashbackCreated"
+                            },
+                            {
                                 "$ref": "#/components/schemas/WebhookData_InstallmentStatusChanged"
                             },
                             {
